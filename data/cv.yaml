@@ -51,7 +51,7 @@ education:
     school: "KAIST AI"
     start: "2025-09"
     end: ""
-    notes: []
+    notes: ["Expected graduation: June 2029"]
 
   - degree: "Bachelor's Degree"
     school: "Yonsei University"

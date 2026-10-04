@@ -6,8 +6,12 @@
 {{- end }}
 {{- with .Content }}
 <section class="block" aria-labelledby="about">
-  {{- /* no visible heading; screen readers still get one */}}
+  {{- /* heading: in content/_index.md; without it the heading is only read by screen readers */}}
+  {{- with $.Params.heading }}
+  <h2 id="about">{{ . }}</h2>
+  {{- else }}
   <h2 id="about" class="vh">About</h2>
+  {{- end }}
   <div class="prose">{{ . }}</div>
 </section>
 {{- end }}
