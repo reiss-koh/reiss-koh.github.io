@@ -16,9 +16,9 @@ paper_name: "Woosung Koh"
 
 role: "PhD Student"
 
+# Add  url: "https://…"  under name to make the affiliation a link.
 affiliation:
   name: "KAIST AI"
-  url: "https://gsai.kaist.ac.kr/"
 
 # Where you are, shown under the role line (delete the line to hide it).
 location: "Bellevue, WA"
