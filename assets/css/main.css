@@ -527,8 +527,10 @@ a.quiet:hover,
 
   .pubs > li { column-gap: .7rem; }
 
-  /* comfortable tap targets */
-  .links a { display: inline-block; padding: .65rem 0; }
+  /* comfortable tap targets; the negative margins keep the visible spacing */
+  .links a { display: inline-block; padding: .65rem .45rem; margin: 0 -.45rem; }
+  .more a,
+  .back a { display: inline-block; padding: .6rem 0; margin: -.6rem 0; }
   .older summary,
   .see-more summary { padding: .65rem 0; }
   .pub-meta { font-size: .85rem; }

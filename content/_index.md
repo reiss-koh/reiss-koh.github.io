@@ -6,4 +6,4 @@ heading: "Hi"
 # The About text is everything below the second "---" line (Markdown works).
 ---
 
-I am interested in pushing the boundaries of humanity. Currently, I am an intern at Amazon AGI Foundations, previously at LG Superintelligence Lab and Trillion Labs. I have published papers in collaboration with researchers at Google DeepMind, Samsung Advanced Institute of Technology, and LG EXAONE Lab. My work spans efficient long-context inference, scaling pre-training, post-training (co-evolution, MOPD, on-policy RFT, SFT), agentic world modeling, feedback/evaluation, and continual learning.
+I am interested in pushing the boundaries of humanity. Currently, I am an intern at Amazon AGI Foundations, previously at LG Superintelligence Lab and Trillion Labs. I have also published papers in collaboration with researchers at Google DeepMind, Samsung Advanced Institute of Technology, and LG EXAONE Lab. My work spans efficient long-context inference, scaling pre-training, post-training (co-evolution, MOPD, on-policy RFT, SFT), agentic world modeling, feedback/evaluation, and continual learning.
