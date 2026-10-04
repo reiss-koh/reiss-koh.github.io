@@ -164,6 +164,6 @@ To undo the rollback later, `git revert` that commit and push.
 
 ## License
 
-The site's content (text and photo) is under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/):
-anyone may reuse it if they give credit. This is stated in the footer (`layouts/_partials/footer.html`).
+The site's content (text and photo) is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/):
+anyone may reuse it, no credit needed. This is stated in the footer (`layouts/_partials/footer.html`).
 The code is under the MIT license in `LICENSE.md`.
