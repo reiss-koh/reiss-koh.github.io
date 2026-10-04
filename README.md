@@ -19,6 +19,7 @@ Every commit to `main` is published to GitHub Pages automatically. Before the fi
 | How many news items show before the "older news" toggle         | `newsVisible` in `hugo.toml`                               |
 | Emoji at the end of news items on/off                           | `newsEmoji` in `hugo.toml` (`true` or `false`)             |
 | Title of the second page with the other papers                  | `title` in `content/publications.md`                       |
+| Gallery photos (the /gallery/ page)                             | upload JPG/PNG photos into `content/gallery/`              |
 
 **Editing on GitHub:** open the file, click the pencil icon, edit, then **Commit changes**.
 To replace the photo, open `assets/images/`, choose **Add file → Upload files**, upload any photo (JPG or PNG, any size),
@@ -167,3 +168,12 @@ To undo the rollback later, `git revert` that commit and push.
 The site's content (text and photo) is under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/):
 anyone may reuse it, with credit. This is stated in the footer (`layouts/_partials/footer.html`).
 The code is under the MIT license in `LICENSE.md`.
+
+## Gallery
+
+The **Gallery** page (`/gallery/`, linked from "traveling" in More About Me) shows every photo in
+`content/gallery/`. On GitHub, open that folder, choose **Add file → Upload files** and drop JPG or PNG
+photos (any size: they are resized automatically, and phone photos are turned upright). They appear in
+file-name order, so names like `2026-05-seoul.jpg` keep them in date order. Captions are optional; see
+the comments in `content/gallery/index.md`. HEIC photos (the iPhone default) can't be shown: export them
+as JPG first.
