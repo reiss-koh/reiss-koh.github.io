@@ -449,21 +449,6 @@ a.quiet:hover,
 .group:first-of-type { margin-top: 0; }
 .back { margin-top: 3rem; font-size: .92rem; }
 
-/* Gallery page: photos in columns, each at its own shape */
-.gallery-intro { margin-bottom: 1.5rem; }
-.gallery { columns: 3; column-gap: .75rem; }
-.gallery figure { margin: 0 0 .75rem; break-inside: avoid; }
-.gallery img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  box-shadow: var(--photo);
-}
-.gallery a:hover img { opacity: .92; }
-.gallery figcaption { margin-top: .35rem; font-size: .85rem; color: var(--muted); }
-.gallery-empty { color: var(--muted); }
-
 /* 9. Footer -------------------------------------------------------------- */
 .footer { padding: 4rem 2rem 3rem; }
 .footer p {
@@ -571,8 +556,6 @@ a.quiet:hover,
   }
 
   .pubs > li { column-gap: .7rem; }
-  .gallery { columns: 2; column-gap: .5rem; }
-  .gallery figure { margin-bottom: .5rem; }
 
   /* comfortable tap targets; the negative margins keep the visible spacing */
   .links a { display: inline-block; padding: .65rem .45rem; margin: 0 -.45rem; }
