@@ -9,4 +9,4 @@ build:
   list: never
 ---
 
-I was born in Seoul but grew up abroad, and moved back to Seoul after high school. For most of my life, English was my primary language, but now (I hope) I am perfectly bilingual. Outside of research, I enjoy traveling, going to the gym...
+I was born in Seoul but grew up abroad, and moved back to Seoul after high school. For most of my life, English was my primary language, but now (hopefully) I am perfectly bilingual. Outside of research, I enjoy traveling (i love great views, like skylines and the sea), finding good food spots, going to the gym, 
