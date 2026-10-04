@@ -1,6 +1,6 @@
-{{- /* The CV (data/cv.yaml): experience, education, mentoring and collaboration
-       under one "CV" heading, then service, awards and More About Me in a
-       "See More" section at the end. Every entry is checked by items.html (an
+{{- /* From data/cv.yaml: experience, mentoring and collaboration under the
+       "Experience" heading, then education, service, awards and More About Me
+       in a "See More" section at the end. Every entry is checked by items.html (an
        award needs a title; a service or mentee line a text).
        Empty lists are skipped; when everything is empty the section is dropped. */ -}}
 {{- $f := "data/cv.yaml" -}}
@@ -14,13 +14,12 @@
 {{- $awards := partial "items.html" (dict "list" $cv.awards "where" (printf "%s, awards" $f) "need" (slice "title")) -}}
 {{- $service := partial "items.html" (dict "list" $cv.service "where" (printf "%s, service" $f) "need" (slice "text")) -}}
 {{- $mentees := partial "items.html" (dict "list" $cv.mentees "where" (printf "%s, mentees" $f) "need" (slice "text")) -}}
-{{- if or $experience $education $mentees $cv.collaboration }}
-<section class="block" aria-labelledby="cv">
-  <h2 id="cv">CV</h2>
+{{- if or $experience $mentees $cv.collaboration }}
+<section class="block" aria-labelledby="experience">
+  <h2 id="experience">Experience</h2>
 
   {{- with $experience }}
   <div class="part">
-    <h3 id="experience">Experience</h3>
     <ul class="rows rows-wide">
       {{- range . }}
       {{- $e := . }}
@@ -31,31 +30,6 @@
         <div>
           {{- .role }}{{ if and .role .org }}, {{ end }}
           {{- with .org }}<strong class="org">{{ with $e.url }}<a href="{{ . }}"{{ if partial "external.html" . }} target="_blank" rel="noopener"{{ end }}>{{ $e.org }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end -}}
-        </div>
-      </li>
-      {{- end }}
-    </ul>
-  </div>
-  {{- end }}
-
-  {{- with $education }}
-  <div class="part">
-    <h3 id="education">Education</h3>
-    <ul class="rows rows-wide">
-      {{- range . }}
-      {{- $e := . }}
-      {{- $where := printf "%s, education \"%v\"" $f (or .school .degree "") }}
-      <li>
-        {{- with partial "range.html" (dict "entry" . "where" $where) }}
-        <span class="when">{{ . }}</span>
-        {{- end }}
-        <div>
-          {{- .degree }}{{ if and .degree .school }}, {{ end }}
-          {{- with .school }}<strong class="org">{{ with $e.url }}<a href="{{ . }}"{{ if partial "external.html" . }} target="_blank" rel="noopener"{{ end }}>{{ $e.school }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end }}
-          {{- /* The notes go on their own line (.sub). The real space and dots keep
-                 them apart from the school, and from each other, in copied text;
-                 like every "·" on the page, the dot is not read aloud. */}}
-          {{- with partial "list.html" (dict "items" .notes "split" false "where" (printf "%s, notes" $where)) }} <span class="sub">{{ range $k, $n := . }}{{ if $k }} <span class="sep" aria-hidden="true">·</span> {{ end }}{{ $n }}{{ end }}</span>{{ end -}}
         </div>
       </li>
       {{- end }}
@@ -83,16 +57,40 @@
 </section>
 {{- end }}
 
-{{- /* Service, awards and the More About Me text (content/more-about-me.md) come
-       last, folded into a "See More" section (<details>, no JavaScript): click
-       its heading to open it */}}
+{{- /* Education, service, awards and the More About Me text
+       (content/more-about-me.md) come last, folded into a "See More" section
+       (<details>, no JavaScript): click its heading to open it */}}
 {{- $more := "" }}
 {{- $moreTitle := "More About Me" }}
 {{- with site.GetPage "/more-about-me" }}{{ $more = .Content }}{{ $moreTitle = .Title | default $moreTitle }}{{ end }}
-{{- if or $service $awards $more }}
+{{- if or $education $service $awards $more }}
 <section class="block" aria-labelledby="see-more">
   <details class="see-more">
     <summary><h2 id="see-more">See More</h2></summary>
+    {{- with $education }}
+    <div class="part">
+      <h3 id="education">Education</h3>
+      <ul class="rows rows-wide">
+        {{- range . }}
+        {{- $e := . }}
+        {{- $where := printf "%s, education \"%v\"" $f (or .school .degree "") }}
+        <li>
+          {{- with partial "range.html" (dict "entry" . "where" $where) }}
+          <span class="when">{{ . }}</span>
+          {{- end }}
+          <div>
+            {{- .degree }}{{ if and .degree .school }}, {{ end }}
+            {{- with .school }}<strong class="org">{{ with $e.url }}<a href="{{ . }}"{{ if partial "external.html" . }} target="_blank" rel="noopener"{{ end }}>{{ $e.school }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end }}
+            {{- /* The notes go on their own line (.sub). The real space and dots keep
+                   them apart from the school, and from each other, in copied text;
+                   like every "·" on the page, the dot is not read aloud. */}}
+            {{- with partial "list.html" (dict "items" .notes "split" false "where" (printf "%s, notes" $where)) }} <span class="sub">{{ range $k, $n := . }}{{ if $k }} <span class="sep" aria-hidden="true">·</span> {{ end }}{{ $n }}{{ end }}</span>{{ end -}}
+          </div>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
     {{- with $service }}
     <div class="part">
       <h3 id="service">Service</h3>
