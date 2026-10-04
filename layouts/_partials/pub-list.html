@@ -17,8 +17,10 @@
     <span class="pub-id"{{ with $kind }} title="{{ . }}"{{ end }}>{{ with $kind }}<span class="vh">{{ . }} </span>{{ end }}{{ . }}</span>
     {{- end }}
     <div class="pub-body">
+      {{- /* a hyphenated word ("Time-series") never splits at its hyphen */}}
+      {{- $title := printf "%v" .title | htmlEscape | replaceRE `(\S+-\S+)` `<span class="nobr">$1</span>` | safeHTML }}
       <h3 class="pub-title" id="{{ $titleID }}">
-        {{- with or .pdf .project .code }}<a href="{{ partial "url.html" . }}">{{ $pub.title }}</a>{{ else }}{{ .title }}{{ end -}}
+        {{- with or .pdf .project .code }}<a href="{{ partial "url.html" . }}">{{ $title }}</a>{{ else }}{{ $title }}{{ end -}}
       </h3>
       {{- with .authors }}
       <p class="pub-authors">{{ partial "authors.html" (dict "authors" . "where" (printf "%s, authors" $where)) }}</p>

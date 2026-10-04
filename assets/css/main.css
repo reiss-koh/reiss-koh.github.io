@@ -152,17 +152,22 @@ a.quiet:hover,
   white-space: nowrap;
 }
 
-/* Small uppercase label: "Interests", CV sub-headings */
-.label,
-.part h3 {
-  margin: 0 0 .5rem;
-  font-size: .75rem;
+/* Small headings: "Interests" in the profile (muted); CV parts such as
+   "Experience" and the groups on the More Publications page */
+.label {
+  margin: 0 0 .3rem;
+  font-size: .85rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.part h3,
+.group > h2 {
+  margin: 0 0 .65rem;
+  font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.4;
-  letter-spacing: .08em;
-  text-transform: uppercase;
 }
-.label { color: var(--muted); }
 
 /* 4. Layout: profile column + content column ----------------------------- */
 .page,
@@ -271,8 +276,7 @@ a.quiet:hover,
   font-size: 1.6rem;
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: .01em;
-  text-transform: uppercase;
+  letter-spacing: -.01em;
 }
 
 .prose p { margin: 0 0 .75rem; text-wrap: pretty; }
@@ -363,24 +367,23 @@ a.quiet:hover,
 }
 .pub-body { grid-column: 2; min-width: 0; }  /* also when a paper has no id */
 
-/* Titles, author lists and venues wrap into lines of similar length, so a
-   last line never holds a single word or name */
 .pub-title {
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.4;
-  text-wrap: balance;
 }
 
-.pub-authors { margin-top: .2rem; font-size: .92rem; line-height: 1.45; color: var(--fg-2); text-wrap: balance; }
+.nobr { white-space: nowrap; }
+
+.pub-authors { margin-top: .2rem; font-size: .92rem; line-height: 1.45; color: var(--fg-2); }
 .pub-authors strong { color: var(--fg); }
 /* A name (with its "*" and comma) stays on one line; only a name longer than
    the whole line wraps inside itself */
 .author { display: inline-block; max-width: 100%; }
 
 /* Venue: italic; a final "(Oral)" etc. is shown upright after a dot */
-.pub-venue { margin-top: .15rem; font-size: .88rem; line-height: 1.45; font-style: italic; text-wrap: balance; }
+.pub-venue { margin-top: .15rem; font-size: .88rem; line-height: 1.45; font-style: italic; }
 .pub-venue .sep { margin: 0; }
 .honour { font-style: normal; font-weight: 600; }
 
@@ -406,15 +409,6 @@ a.quiet:hover,
 /* The "More Publications" page: groups such as "Journal articles" */
 .group { margin-top: 2rem; }
 .group:first-of-type { margin-top: 0; }
-.group > h2 {
-  margin: 0 0 1rem;
-  font-size: .75rem;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
 .back { margin-top: 3rem; font-size: .92rem; }
 
 /* 9. Footer -------------------------------------------------------------- */

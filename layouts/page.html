@@ -16,7 +16,7 @@
       {{- end }}
       <section class="block" aria-labelledby="page-title">
         <h1 class="page-title" id="page-title">{{ .Title }}</h1>
-        {{- $groups := slice (dict "letter" "J" "name" "Journal articles") (dict "letter" "W" "name" "Workshop papers") (dict "letter" "C" "name" "Conference papers") (dict "letter" "P" "name" "Preprints") }}
+        {{- $groups := slice (dict "letter" "J" "name" "Journal Articles") (dict "letter" "W" "name" "Workshop Papers") (dict "letter" "C" "name" "Conference Papers") (dict "letter" "P" "name" "Preprints") }}
         {{- range $g := $groups }}
           {{- $papers := slice }}
           {{- range $others }}
