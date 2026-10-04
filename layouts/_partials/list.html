@@ -1,0 +1,34 @@
+{{- /* Returns a list of non-empty, trimmed strings. Accepts a YAML list, or a
+       plain string (an easy slip in the web editor), which is split at commas.
+       With "split" false a string becomes one item (for free text such as notes).
+       An entry that was read as "key: value" (a note with a colon but without
+       quotes, or a list whose "- " dashes are missing) stops the build with a
+       message that starts with "where"; without "where" it is left out.
+       Usage: partial "list.html" (dict "items" .tags "where" "data/publications.yaml, paper \"C5\", tags")
+              partial "list.html" (dict "items" .notes "split" false "where" "…") */ -}}
+{{- $split := true -}}
+{{- if isset . "split" }}{{ $split = .split }}{{ end -}}
+{{- $where := .where -}}
+{{- $out := slice -}}
+{{- with .items -}}
+  {{- $items := . -}}
+  {{- if reflect.IsMap . -}}
+    {{- $items = slice . -}}
+  {{- else if not (reflect.IsSlice .) -}}
+    {{- $s := printf "%v" . -}}
+    {{- $items = cond $split (split $s ",") (slice $s) -}}
+  {{- end -}}
+  {{- range $items -}}
+    {{- if reflect.IsMap . -}}
+      {{- $pairs := slice -}}
+      {{- range $k, $v := . }}{{ $pairs = $pairs | append (printf "%s: %v" $k $v) }}{{ end -}}
+      {{- $text := delimit $pairs ", " -}}
+      {{- with $where -}}
+        {{- errorf "%s: %q was read as a key and a value, because of the colon. Write each entry on its own line, starting with \"- \" and inside double quotes: - %q" . $text $text -}}
+      {{- end -}}
+    {{- else -}}
+      {{- with strings.TrimSpace (printf "%v" .) }}{{ $out = $out | append . }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

@@ -1,0 +1,43 @@
+{{- /* Sidebar (data/profile.yaml). One HTML order for every screen size: on
+       phones, main.css turns it into a compact header (photo beside the name). */ -}}
+{{- $f := "data/profile.yaml" -}}
+{{- $p := hugo.Data.profile | default dict -}}
+{{- $name := $p.name | default site.Title -}}
+{{- $aff := $p.affiliation | default dict -}}
+{{- if not (reflect.IsMap $aff) }}{{ $aff = dict "name" (printf "%v" $aff) }}{{ end -}}
+{{- $interests := partial "list.html" (dict "items" $p.interests "where" (printf "%s, interests" $f)) -}}
+{{- $links := partial "items.html" (dict "list" $p.links "where" (printf "%s, links" $f) "need" (slice "label" "url")) -}}
+{{- $photo := partial "photo.html" $p -}}
+<header class="profile{{ if $photo.src }} has-photo{{ end }}">
+  <h1 class="name">{{ $name }}</h1>
+  {{- with $photo.src }}
+  <img class="avatar" src="{{ . }}"{{ with $photo.srcset }} srcset="{{ . }}" sizes="(max-width: 860px) 88px, 240px"{{ end }} alt="Photo of {{ $name }}" width="640" height="640">
+  {{- end }}
+  {{- if or $p.role $aff.name }}
+  <p class="role">
+    {{- with $p.role }}{{ . }}{{ end }}
+    {{- with $aff.name }}
+      {{- if $p.role }} at {{ end }}
+      {{- if $aff.url }}<a href="{{ $aff.url }}"><strong>{{ . }}</strong></a>{{ else }}<strong>{{ . }}</strong>{{ end }}
+    {{- end -}}
+  </p>
+  {{- end }}
+  {{- with $interests }}
+  <p class="label" id="interests-label">Interests</p>
+  <ul class="interests" aria-labelledby="interests-label">
+    {{- range $i, $x := . }}
+    {{- /* the comma is real text (hidden on phones, where dots separate the items) */ -}}
+    <li>{{ if $i }}<span class="comma">, </span>{{ end }}{{ $x }}</li>
+    {{- end }}
+  </ul>
+  {{- end }}
+  {{- with $links }}
+  <ul class="links">
+    {{- range . }}
+    {{- /* rel="me" marks your profiles elsewhere (not email, not files in the repository) */}}
+    {{- $url := partial "url.html" .url }}
+    <li><a href="{{ $url }}"{{ if findRE `^https?://` $url 1 }} rel="me"{{ end }}>{{ .label }}</a></li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</header>

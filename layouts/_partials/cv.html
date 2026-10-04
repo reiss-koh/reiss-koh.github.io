@@ -1,0 +1,113 @@
+{{- /* Experience, education, awards, service, mentoring and collaboration
+       (data/cv.yaml), grouped under one "CV" heading. Every entry is checked by
+       items.html (an award needs a title; a service or mentee line a text).
+       Empty lists are skipped; when everything is empty the section is dropped. */ -}}
+{{- $f := "data/cv.yaml" -}}
+{{- $cv := hugo.Data.cv | default dict -}}
+{{- if not (reflect.IsMap $cv) -}}
+  {{- errorf "%s should consist of the sections experience:, education:, awards:, service:, mentees: and collaboration:, each at the start of a line, like the original file." $f -}}
+  {{- $cv = dict -}}
+{{- end -}}
+{{- $experience := partial "items.html" (dict "list" $cv.experience "where" (printf "%s, experience" $f)) -}}
+{{- $education := partial "items.html" (dict "list" $cv.education "where" (printf "%s, education" $f)) -}}
+{{- $awards := partial "items.html" (dict "list" $cv.awards "where" (printf "%s, awards" $f) "need" (slice "title")) -}}
+{{- $service := partial "items.html" (dict "list" $cv.service "where" (printf "%s, service" $f) "need" (slice "text")) -}}
+{{- $mentees := partial "items.html" (dict "list" $cv.mentees "where" (printf "%s, mentees" $f) "need" (slice "text")) -}}
+{{- if or $experience $education $awards $service $mentees $cv.collaboration }}
+<section class="block" aria-labelledby="cv">
+  <h2 id="cv">CV</h2>
+
+  {{- with $experience }}
+  <div class="part">
+    <h3 id="experience">Experience</h3>
+    <ul class="rows rows-wide">
+      {{- range . }}
+      {{- $e := . }}
+      <li>
+        {{- with partial "range.html" (dict "entry" . "where" (printf "%s, experience \"%v\"" $f (or .role .org ""))) }}
+        <span class="when">{{ . }}</span>
+        {{- end }}
+        <div>
+          {{- .role }}{{ if and .role .org }}, {{ end }}
+          {{- with .org }}<strong class="org">{{ with $e.url }}<a href="{{ . }}">{{ $e.org }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end -}}
+        </div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $education }}
+  <div class="part">
+    <h3 id="education">Education</h3>
+    <ul class="rows rows-wide">
+      {{- range . }}
+      {{- $e := . }}
+      {{- $where := printf "%s, education \"%v\"" $f (or .school .degree "") }}
+      <li>
+        {{- with partial "range.html" (dict "entry" . "where" $where) }}
+        <span class="when">{{ . }}</span>
+        {{- end }}
+        <div>
+          {{- .degree }}{{ if and .degree .school }}, {{ end }}
+          {{- with .school }}<strong class="org">{{ with $e.url }}<a href="{{ . }}">{{ $e.school }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end }}
+          {{- /* The notes go on their own line (.sub). The real space and dots keep
+                 them apart from the school, and from each other, in copied text;
+                 like every "·" on the page, the dot is not read aloud. */}}
+          {{- with partial "list.html" (dict "items" .notes "split" false "where" (printf "%s, notes" $where)) }} <span class="sub">{{ range $k, $n := . }}{{ if $k }} <span class="sep" aria-hidden="true">·</span> {{ end }}{{ $n }}{{ end }}</span>{{ end -}}
+        </div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $awards }}
+  <div class="part">
+    <h3 id="awards">Awards</h3>
+    <ul class="rows rows-wide">
+      {{- range . }}
+      <li>
+        {{- with partial "date.html" (dict "date" .date "where" (printf "%s, award \"%v\"" $f .title)) }}
+        <span class="when">{{ . }}</span>
+        {{- end }}
+        <div>
+          {{- .title }}{{ with .by }}, <span class="by">{{ . }}</span>{{ end }}
+          {{- with .note }} <span class="sub">{{ . }}</span>{{ end -}}
+        </div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $service }}
+  <div class="part">
+    <h3 id="service">Service</h3>
+    <ul class="rows rows-wide">
+      {{- range . }}
+      <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $mentees }}
+  <div class="part">
+    <h3 id="mentoring">Mentoring</h3>
+    <ul class="rows rows-wide">
+      {{- range . }}
+      <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $cv.collaboration }}
+  <div class="part">
+    <h3 id="collaboration">Collaboration</h3>
+    <div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>
+  </div>
+  {{- end }}
+</section>
+{{- end }}

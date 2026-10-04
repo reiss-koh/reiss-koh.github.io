@@ -1,0 +1,35 @@
+{{- /* News from data/news.yaml. The newest newsVisible items (hugo.toml, default 8)
+       are shown; the rest go into a collapsible "Older news" list (<details>,
+       no JavaScript); newsVisible = 0 puts every item there. Each item needs a
+       date and a text (see items.html). An empty file drops the section. */ -}}
+{{- with partial "items.html" (dict "list" hugo.Data.news "where" "data/news.yaml" "need" (slice "date" "text")) }}
+{{- $visible := 8 }}
+{{- if isset site.Params "newsvisible" }}
+  {{- $n := try (int site.Params.newsvisible) }}
+  {{- if or $n.Err (lt $n.Value 0) }}
+    {{- errorf "hugo.toml: newsVisible must be a whole number, 0 or more (for example 8), but it is %q." (printf "%v" site.Params.newsvisible) }}
+  {{- else }}
+    {{- $visible = $n.Value }}
+  {{- end }}
+{{- end }}
+<section class="block" aria-labelledby="news">
+  <h2 id="news">News</h2>
+  {{- with first $visible . }}
+  <ul class="rows">
+    {{- range . }}
+    {{ partial "news-item.html" . }}
+    {{- end }}
+  </ul>
+  {{- end }}
+  {{- with after $visible . }}
+  <details class="older">
+    <summary>Older news ({{ len . }})</summary>
+    <ul class="rows">
+      {{- range . }}
+      {{ partial "news-item.html" . }}
+      {{- end }}
+    </ul>
+  </details>
+  {{- end }}
+</section>
+{{- end }}

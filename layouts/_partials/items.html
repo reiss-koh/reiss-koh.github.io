@@ -1,0 +1,40 @@
+{{- /* Returns the entries of a list in a data file (news items, papers, awards,
+       links, ...) and checks how each one is written. When the list or an entry
+       is not written like the examples in the file, or an entry lacks a key
+       listed in "need", the build stops with a message that names the file
+       and the entry (and that entry is left out). Without "where", such entries
+       are just left out (for a list that is also checked elsewhere).
+       Usage: partial "items.html" (dict "list" hugo.Data.news "where" "data/news.yaml" "need" (slice "date" "text")) */ -}}
+{{- $where := .where -}}
+{{- $need := .need -}}
+{{- $out := slice -}}
+{{- with .list -}}
+  {{- if not (reflect.IsSlice .) -}}
+    {{- with $where -}}
+      {{- $found := printf "%q" (printf "%v" $.list) -}}
+      {{- if reflect.IsMap $.list }}{{ $keys := slice }}{{ range $k, $v := $.list }}{{ $keys = $keys | append $k }}{{ end }}{{ $found = printf "\"key: value\" lines (%s)" (delimit $keys ", ") }}{{ end -}}
+      {{- errorf "%s should be a list of entries that each start with \"- \" (a dash and a space), like the examples in the file, but it was read as %s. Check for a missing dash or a line that does not belong there." . $found -}}
+    {{- end -}}
+  {{- else -}}
+    {{- range $i, $e := . -}}
+      {{- if not (reflect.IsMap $e) -}}
+        {{- with $where -}}
+          {{- errorf "%s, entry %d (%q): write it as \"key: value\" lines, like the entries next to it." . (add $i 1) (printf "%v" $e) -}}
+        {{- end -}}
+      {{- else -}}
+        {{- $missing := slice -}}
+        {{- range $need }}{{ if not (index $e .) }}{{ $missing = $missing | append . }}{{ end }}{{ end -}}
+        {{- if $missing -}}
+          {{- with $where -}}
+            {{- $pairs := slice -}}
+            {{- range $k, $v := $e }}{{ $pairs = $pairs | append (printf "%s: %v" $k $v) }}{{ end -}}
+            {{- errorf "%s, entry %d: %s is missing or empty (check the spelling of the key). The entry reads: %s" . (add $i 1) (delimit $missing " and ") (delimit $pairs ", ") -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $out = $out | append $e -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

@@ -1,0 +1,162 @@
+# CV: experience, education, awards, service, mentees and collaboration.
+# Each list is shown in the order written here (newest first).
+#
+# To add an entry, copy an existing entry of the same section (from its "- "
+# line down to its last line), paste it at the top of that section, and edit
+# it. Dates are "YYYY-MM"; an empty end date ("") is shown as "Present".
+# Keep text inside the double quotes; write \" for a literal double quote.
+# Optional: url (experience, education) can be deleted; an award's note can
+# be left as "".
+
+experience:
+  - role: "Applied Scientist Intern (L5)"
+    org: "Amazon AGI (Bellevue)"
+    url: "https://www.amazon.science"
+    start: "2026-09"
+    end: "2026-12"
+
+  - role: "Research Scientist Intern"
+    org: "LG AI Research, Superintelligence Lab"
+    url: "https://www.lgresearch.ai"
+    start: "2026-05"
+    end: "2026-08"
+
+  - role: "Research Intern"
+    org: "Trillion Labs"
+    url: "https://trillionlabs.co/"
+    start: "2025-06"
+    end: "2026-01"
+
+  - role: "Visiting Researcher"
+    org: "OSI Lab, KAIST AI"
+    url: "https://osi.kaist.ac.kr/"
+    start: "2023-12"
+    end: "2025-08"
+
+  - role: "Research Intern"
+    org: "HuGe Lab, KAIST AI"
+    url: "https://www.hugelab.org/"
+    start: "2023-07"
+    end: "2023-09"
+
+  - role: "Research Intern"
+    org: "FE Lab, KAIST"
+    url: "https://felab.kaist.ac.kr"
+    start: "2022-06"
+    end: "2023-04"
+
+# notes: extra lines shown under an entry (use notes: [] for none).
+education:
+  - degree: "MS+PhD Student"
+    school: "KAIST AI"
+    start: "2025-09"
+    end: ""
+    notes: []
+
+  - degree: "Bachelor's Degree"
+    school: "Yonsei University"
+    start: "2019-03"
+    end: "2025-06"
+    notes:
+      - "GPA: 4.07/4.3"
+      - "2 Year Leave for Mandatory National Service"
+
+  - degree: "Diploma Programme"
+    school: "International Baccalaureate"
+    start: ""  # hidden on the old site (it had 2017-03 commented out)
+    end: "2018-06"
+    notes:
+      - "Math, Physics, Economics, Business, English, Korean"
+
+awards:
+  - title: "Silver Reviewer Award"
+    by: "ICML 2026"
+    date: "2026-05"
+    note: ""
+
+  - title: "Scholar Award"
+    by: "NeurIPS 2025"
+    date: "2025-10"
+    note: ""
+
+  - title: "27th Merit-based Tuition Scholarship"
+    by: "Welcome Finance Group"
+    date: "2023-01"
+    note: ""
+
+  - title: "26th Merit-based Tuition Scholarship"
+    by: "Welcome Finance Group"
+    date: "2023-01"
+    note: ""
+
+  - title: "3rd Prize (out of 261) - Big Data Competition"
+    by: "NH Investment & Securities"
+    date: "2022-12"
+    note: ""
+
+  - title: "Excellence Prize - Research Paper"
+    by: "Korean Institute of Information Technology (KIIT)"
+    date: "2022-12"
+    note: ""
+
+  - title: "3rd Prize - Research Paper Orals"
+    by: "Korean Data & Information Science Society (KDISS)"
+    date: "2022-11"
+    note: ""
+
+  - title: "4th Prize - 12th DB Finance & Economics"
+    by: "DB Group"
+    date: "2022-05"
+    note: "Shared quantitative strategy research paper in-person at Nanyang Technology University (NTU). Received scholarship and full sponsored trip to Singapore."
+
+  - title: "2nd Prize - 17th Economics Essay Competition"
+    by: "Woori Financial Group"
+    date: "2021-11"
+    note: "Published at Korea Times."
+
+  - title: "2nd Place - RUTC (Algorithmic Trading)"
+    by: "University of Toronto"
+    date: "2021-08"
+    note: "Placed 1st in the Algorithmic Statistical Arbitrage case."
+
+  - title: "Nominated and Accepted to 1 Year Exchange at University of Toronto"
+    by: "Yonsei University, University of Toronto"
+    date: "2020-08"
+    note: "It was later canceled due to COVID-19 :("
+
+  # Hidden on the old site too (copied here exactly as it was). To show it,
+  # uncomment it and rename awarder -> by, summary -> note, date -> "2020-08".
+  # - title: Computer Science Dual Degree Acceptance
+  #   date: '2020-08-31'
+  #   awarder: Yonsei University
+  #   summary: |
+  #     Admitted to second degree in School of Computing, B.S. Computer Science. This was the earliest possible dual degree admission for my cohort, and is always very competitive. However, I later retracted this as it was unclear how it was helping my AI/ML research career. 
+
+  - title: "Academic Honors"
+    by: "Yonsei University"
+    date: "2020-08"
+    note: ""
+
+# Reviewing and lab service, shown in this order.
+service:
+  - label: "2027 Reviewer"
+    text: "ICLR"
+
+  - label: "2026 Reviewer"
+    text: "ICLR, ICML, ACL ARR (January), NeurIPS, COLM"
+
+  - label: "2025 Reviewer"
+    text: "KDD (Research Track)"
+
+  - label: "Rolling Reviewer"
+    text: "TMLR"
+
+  - label: "2026 Lab Service"
+    text: "Server Manager (9 nodes), Teaching Assistant (Stochastic Processes for AI; Graduate-level)"
+
+mentees:
+  - label: "2026"
+    text: "Gilles Massoulié (ENSAE Paris)"
+
+# One paragraph (Markdown works).
+collaboration: "I've collaborated with researchers at Google DeepMind, Samsung Advanced Institute of Technology (SAIT), LG AI Research (EXAONE Lab, Superintelligence Lab), and Trillion Labs."

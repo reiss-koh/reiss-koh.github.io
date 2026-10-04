@@ -1,0 +1,14 @@
+{{- /* Shows a "YYYY-MM" date, e.g. "2026-09", as "Sep 2026". A full date such as
+       "2026-09-15" (quoted or not) also works: only the year and month are used.
+       Anything else stops the build with a message that names the entry ("where").
+       Usage: partial "date.html" (dict "date" .date "where" "data/cv.yaml, award \"Scholar Award\"") */ -}}
+{{- with .date -}}
+  {{- $raw := strings.TrimSpace (printf "%v" .) -}}
+  {{- $ym := substr $raw 0 7 -}}
+  {{- $t := try (time.AsTime (printf "%s-01" $ym)) -}}
+  {{- if or $t.Err (not (findRE `^[0-9]{4}-(0[1-9]|1[0-2])(-[0-9]{2}([^0-9].*)?)?$` $raw 1)) -}}
+    {{- errorf "%s: dates must be written as \"YYYY-MM\" with a plain hyphen (-), for example \"2026-09\", but found %q." $.where $raw -}}
+  {{- else -}}
+    <time datetime="{{ $ym }}">{{ $t.Value | time.Format "Jan 2006" }}</time>
+  {{- end -}}
+{{- end -}}

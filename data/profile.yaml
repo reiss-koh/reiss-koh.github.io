@@ -1,0 +1,36 @@
+# Your profile: shown in the sidebar and used for link previews and search
+# results. (The title in the browser tab is set in content/_index.md.)
+#
+# To edit, change the text inside the double quotes. To use a double quote
+# inside a value, write \" (for example: "the \"best\" paper").
+# To add a link, copy one of the lines under "links:", paste it where you want
+# it (links are shown in this order), and edit the label and url. Every link
+# needs both. A file kept in this repository, such as a CV in static/files/,
+# is linked as url: "files/cv.pdf".
+
+name: "Woosung (Reiss) Koh"
+
+# Your name as it is written in author lists, without the *. It is bolded
+# automatically in the publication author lists, also where it has a *.
+paper_name: "Woosung Koh"
+
+role: "PhD Student"
+
+affiliation:
+  name: "KAIST AI"
+  url: "https://gsai.kaist.ac.kr/"
+
+# Photo inside the assets/ folder (JPG or PNG, any size): it is cropped to a
+# centred square and resized automatically.
+photo: "images/visa_dp.png"
+
+# One sentence for search engines and link previews.
+description: "Woosung (Reiss) Koh is a PhD student at KAIST AI interested in foundation models, learning, and efficiency."
+
+interests: ["Foundation Models", "Learning", "Efficiency"]
+
+links:
+  - { label: "Email",          url: "mailto:reiss.koh@gmail.com" }
+  - { label: "GitHub",         url: "https://github.com/reiss-koh" }
+  - { label: "Scholar",        url: "https://scholar.google.com/citations?user=I8j9BBwAAAAJ&hl=en" }
+  - { label: "LinkedIn",       url: "https://www.linkedin.com/in/reisskoh/" }

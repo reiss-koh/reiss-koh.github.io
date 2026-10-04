@@ -1,0 +1,20 @@
+{{- /* Author list: one comma-separated string (a YAML list also works). Your name
+       (paper_name in data/profile.yaml) is bolded; a trailing * marks equal
+       contribution. Extra spaces, upper/lower case and a * in paper_name are
+       ignored when looking for your name. Each name, with its * and comma,
+       is kept on one line.
+       Usage: partial "authors.html" (dict "authors" .authors "where" "data/publications.yaml, paper \"C5\", authors") */ -}}
+{{- $spaces := `[\s\p{Zs}]+` -}}
+{{- $me := (hugo.Data.profile | default dict).paper_name | default "" | printf "%v" | replaceRE $spaces " " | strings.TrimSpace | strings.TrimRight "*" | strings.TrimSpace | lower -}}
+{{- $names := partial "list.html" (dict "items" .authors "where" .where) -}}
+{{- $last := sub (len $names) 1 -}}
+{{- range $i, $author := $names -}}
+  {{- $bare := strings.TrimRight "*" $author -}}
+  {{- $stars := strings.TrimPrefix $bare $author -}}
+  {{- $name := strings.TrimSpace $bare -}}
+  <span class="author">
+    {{- if and $me (eq (replaceRE $spaces " " $name | lower) $me) }}<strong>{{ $name }}</strong>{{ else }}{{ $name }}{{ end -}}
+    {{- $stars }}{{ if lt $i $last }},{{ end -}}
+  </span>
+  {{- if lt $i $last }} {{ end -}}
+{{- end -}}

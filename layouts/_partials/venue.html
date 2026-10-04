@@ -1,0 +1,17 @@
+{{- /* Venue line. Honours in brackets at the end, such as "(Oral)", "(Spotlight)",
+       "(Best Paper Award)" or "(Outstanding Paper)", are split off and shown
+       after a dot: "NAACL 2025 Main Long · Oral". Several work too:
+       "X (Oral) (Best Paper Award)" shows as "X · Oral · Best Paper Award".
+       Other brackets, such as "(SCIE, Q1)", stay part of the venue. */ -}}
+{{- $venue := strings.TrimSpace (printf "%v" .) -}}
+{{- $words := `oral|spotlight|awards?|best|outstanding|honou?rable|mention|highlights?|distinguished|notable|talk|prize|winner|finalist|runner-up` -}}
+{{- $re := printf `(?i)^(.*?\S)\s*\(([^()]*\b(?:%s)\b[^()]*)\)$` $words -}}
+{{- $honours := slice -}}
+{{- range seq 5 -}}
+  {{- with findRESubmatch $re $venue 1 -}}
+    {{- $venue = index . 0 1 -}}
+    {{- $honours = $honours | append (strings.TrimSpace (index . 0 2)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $venue -}}
+{{- range collections.Reverse $honours }}&nbsp;<span class="sep" aria-hidden="true">·</span> <span class="honour">{{ . }}</span>{{ end -}}

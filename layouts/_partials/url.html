@@ -1,0 +1,10 @@
+{{- /* A link from a data file, ready for href. A file kept in the repository
+       (under static/), written as "files/cv.pdf" or "/files/cv.pdf", gets the
+       site's base path in front, so the link also works while the site lives
+       in a sub-folder such as /reisskoh/. Web addresses (https://…, mailto:…)
+       are returned unchanged. */ -}}
+{{- $u := strings.TrimSpace (printf "%v" .) -}}
+{{- if not (or (findRE `^[a-zA-Z][a-zA-Z0-9+.-]*:` $u 1) (hasPrefix $u "//") (hasPrefix $u "#")) -}}
+  {{- $u = strings.TrimPrefix "/" $u | relURL -}}
+{{- end -}}
+{{- return $u -}}

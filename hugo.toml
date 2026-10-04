@@ -1,0 +1,14 @@
+# Site settings. Content lives in data/*.yaml and content/_index.md — see README.md.
+# baseURL is replaced automatically by the GitHub Pages deploy workflow.
+baseURL = "https://reiss-koh.github.io/"
+locale = "en-us"
+title = "Woosung (Reiss) Koh"
+disableKinds = ["taxonomy", "term", "section", "rss"]
+enableRobotsTXT = true
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[params]
+  # How many news items to show before the "older news" toggle.
+  newsVisible = 8

@@ -1,0 +1,11 @@
+# Keeps the GitHub Actions in .github/workflows up to date, so the deploy
+# doesn't break when GitHub retires old action versions.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    groups:
+      actions: # one combined pull request instead of one per action
+        patterns: ["*"]

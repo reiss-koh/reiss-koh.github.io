@@ -1,0 +1,107 @@
+# Publications: shown in the order written here (newest first).
+#
+# To add a paper, copy a whole entry (from its "- id:" line down to the line
+# before the next "- id:"), paste it at the top of the list, and edit it.
+#   id:      C = conference, J = journal, W = workshop, P = preprint, plus a
+#            number, for example "C7".
+#   authors: ONE line, names separated by ", ". Put * right after a name for
+#            equal contribution. Your name (paper_name in data/profile.yaml)
+#            is bolded automatically.
+#   venue:   plain text, for example "NeurIPS 2026 (Oral)" or "Pre-print".
+#   tags:    research topics, for example ["Reasoning", "Efficiency"].
+#   Links are optional; keep only the ones you have. They are always shown in
+#   this order: pdf, code, project, dataset, video, slides, poster, blog.
+# Keep text inside the double quotes; write \" for a literal double quote.
+
+- id: "P2"
+  title: "Continually Post-training Small Models via Synthetic Self-distillation"
+  authors: "Woosung Koh, Hyunsoo Lee, Kyungjae Lee, Haeju Park, Dahyun Lee, Dasol Hwang, Moontae Lee"
+  venue: "Pre-print"
+  tags: ["Continual Learning", "Self-distillation", "Fine-tuning", "Small Language Model"]
+
+- id: "P1"
+  title: "Language Models Can Control Their Own Attention"
+  authors: "Namgyu Ho*, Huzama Ahmad*, Woosung Koh*, Se-Young Yun, Tal Schuster, Cicero Nogueira dos Santos"
+  venue: "Pre-print"
+  tags: ["Long-context", "Efficient Inference", "Sparse Attention"]
+  pdf: "https://arxiv.org/pdf/2609.02737"
+
+- id: "C6"
+  title: "mSFT: Addressing Dataset Mixtures Overfiting Heterogeneously in Multi-task SFT"
+  authors: "Woosung Koh*, Jeyoung Jeon*, Youngjin Song, Yujin Cheon, Soowon Oh, Jaehyeong Choi, Se-Young Yun"
+  venue: "AACL 2026 Main"
+  tags: ["Post-training", "Multi-task", "Generalization"]
+  pdf: "https://arxiv.org/pdf/2603.21606"
+  code: "https://github.com/reiss-koh/msft"
+
+- id: "J2"
+  title: "A Taxonomy of Heterogeneous Statistical Interdependencies for Graph-based Financial Time Series Prediction"
+  authors: "Insu Choi*, Woosung Koh*, Gimin Kang, Yuntae Jang, Woo Chang Kim"
+  venue: "Engineering Applications of Artificial Intelligence (SCIE, Q1)"
+  tags: ["Time-series Prediction", "Non-stationarity", "Financial Markets"]
+  pdf: "https://www.sciencedirect.com/science/article/abs/pii/S0952197626021160"
+
+- id: "C5"
+  title: "Generative Visual Code Mobile World Models"
+  authors: "Woosung Koh*, Sungjun Han*, Segyu Lee, Se-Young Yun, Jay Shin"
+  venue: "ICML 2026"
+  tags: ["World Model", "Mobile GUI", "Code Generation", "VLM", "Post-training"]
+  pdf: "https://arxiv.org/pdf/2602.01576"
+  code: "https://github.com/trillion-labs/gWorld"
+  project: "https://trillionlabs-gworld.github.io/"
+
+- id: "C4"
+  title: "Predicting LLM Reasoning Performance with Small Proxy Model"
+  authors: "Woosung Koh, Juyoung Suk, Sungjun Han, Se-Young Yun, Jay Shin"
+  venue: "ICLR 2026"
+  tags: ["Pre-training", "Scaling", "Reasoning", "Efficiency"]
+  pdf: "https://arxiv.org/pdf/2509.21013"
+  dataset: "https://huggingface.co/datasets/trillionlabs/rBridge"
+
+- id: "C3"
+  title: "AdaSTaR: Adaptive Data Sampling for Training Self-Taught Reasoners"
+  authors: "Woosung Koh, Wonbeen Oh, Jaein Jang, MinHyung Lee, Hyeongjin Kim, Ah Yeon Kim, Joonkee Kim, Junghyun Lee, Taehyeon Kim, Se-Young Yun"
+  venue: "NeurIPS 2025"
+  tags: ["Post-training", "Reasoning", "Data Sampling", "Training Efficiency"]
+  pdf: "https://www.arxiv.org/abs/2505.16322"
+  code: "https://github.com/reiss-koh/AdaSTaR"
+
+- id: "C2"
+  title: "C²: Scalable Auto-Feedback for LLM-based Chart Generation"
+  authors: "Woosung Koh*, Jang Han Yoon*, MinHyung Lee, Youngjin Song, Jaegwan Cho, Jaehyun Kang, Taehyeon Kim, Se-Young Yun, Youngjae Yu, Bongshin Lee"
+  venue: "NAACL 2025 Main Long (Oral)"
+  tags: ["Chart Generation", "Code Generation", "VLM-as-a-Judge", "Inference-time Scaling"]
+  pdf: "https://arxiv.org/abs/2410.18652"
+  code: "https://github.com/chartsquared/C-2"
+  project: "https://chartsquared.github.io/"
+  video: "https://youtu.be/xZls5ghmB14?si=-fCHF9CjD_A7ZVXm"
+
+- id: "C1"
+  title: "FlickerFusion: Intra-trajectory Domain Generalizing Multi-Agent RL"
+  authors: "Woosung Koh, Wonbeen Oh, Siyeol Kim, Suhin Shin, Hyeongjin Kim, Jaein Jang, Junghyun Lee, Se-Young Yun"
+  venue: "ICLR 2025"
+  tags: ["Multi-Agent RL", "Domain Generalization"]
+  pdf: "https://arxiv.org/abs/2410.15876"
+  code: "https://github.com/flickerfusion305/FlickerFusion"
+  project: "https://flickerfusion305.github.io"
+
+- id: "W2"
+  title: "Encoding Temporal Statistical-space Priors via Augmented Representation"
+  authors: "Insu Choi*, Woosung Koh*, Gimin Kang, Yuntae Jang, Woo Chang Kim"
+  venue: "IJCAI 2024 STRL Workshop (Oral)"
+  tags: ["Time-series Prediction", "Non-stationarity", "Financial Markets"]
+  pdf: "https://arxiv.org/abs/2401.16808"
+
+- id: "W1"
+  title: "Curriculum Learning and Imitation Learning for Model-free Control on Financial Time-series"
+  authors: "Woosung Koh*, Insu Choi*, Yuntae Jang*, Gimin Kang, Woo Chang Kim"
+  venue: "AAAI 2024 AI4TS Workshop (Oral)"
+  tags: ["Reinforcement Learning", "Financial Markets"]
+  pdf: "https://arxiv.org/abs/2311.13326"
+
+- id: "J1"
+  title: "Network-based exploratory data analysis and explainable three-stage deep clustering for financial customer profiling"
+  authors: "Insu Choi*, Woosung Koh*, Bonwoo Koo*, Woo Chang Kim"
+  venue: "Engineering Applications of Artificial Intelligence (SCIE, Q1)"
+  tags: ["Explainable AI", "Personalized AI"]
+  pdf: "https://www.sciencedirect.com/science/article/abs/pii/S0952197623015622"

@@ -1,0 +1,15 @@
+{{- /* One news item: the date, then the text (inline Markdown). A text that
+       begins like a Markdown block (">", "# ", "- ", "1. ") is shown as written,
+       not turned into a quote, heading or list. Emoji at the end are joined to
+       the word before them with a no-break space (U+00A0), so an emoji never
+       ends up alone on a line. */ -}}
+{{- $text := strings.TrimSpace (printf "%v" .text) -}}
+{{- $md := $text | replaceRE `^>` `\>` | replaceRE `^(#{1,6}\s)` `\$1` | replaceRE `^([-+*]\s)` `\$1` | replaceRE `^([0-9]{1,9})([.)]\s)` `$1\$2` -}}
+{{- $html := markdownify $md | string -}}
+{{- $emoji := `(?:[0-9#*]\x{FE0F}?\x{20E3}|[\p{So}\p{Sk}\x{200D}\x{20E3}\x{FE0E}\x{FE0F}\x{E0020}-\x{E007F}])+` -}}
+{{- $re := printf `^([\s\S]*?\S)\s+(%s(?:[ \t]+%s)*\p{P}*)((?:</[a-z]+>)*)\s*$` $emoji $emoji -}}
+{{- with findRESubmatch $re $html 1 -}}
+  {{- $m := index . 0 -}}
+  {{- $html = printf "%s\u00a0%s%s" (index $m 1) (replace (index $m 2) " " "\u00a0") (index $m 3) -}}
+{{- end -}}
+<li>{{ partial "date.html" (dict "date" .date "where" (printf "data/news.yaml, the news item %q" (truncate 40 $text))) }}<div>{{ $html | safeHTML }}</div></li>

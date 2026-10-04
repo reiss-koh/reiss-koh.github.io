@@ -1,0 +1,511 @@
+/* Homepage styles: one file, no build step.
+   Colors, widths and the date columns live in the variables in section 2. */
+
+/* 1. Font ---------------------------------------------------------------- */
+/* Inter, self-hosted (SIL Open Font License, see static/fonts/OFL.txt). The
+   URLs are relative to this file (css/ sits next to fonts/), so they also work
+   when the site lives in a sub-folder such as /reisskoh/. head.html preloads
+   the upright latin face from the same URL. The latin-ext and vietnamese
+   files (letters such as Ł, ğ, ř, ễ in author names) are downloaded only when
+   the page uses one of the characters in their unicode-range. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin-ext-italic.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-vietnamese.woff2") format("woff2");
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-vietnamese-italic.woff2") format("woff2");
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+/* 2. Design tokens (contrast ratios are against --bg) -------------------- */
+:root {
+  --bg: #ffffff;
+  --fg: #111111;         /* text, titles, venues, your name (18.9:1) */
+  --fg-2: #3f3f46;       /* co-authors, organisations, awarders (10.4:1) */
+  --muted: #6b7280;      /* dates, labels, paper ids, tags (4.83:1, WCAG AA) */
+  --line: #e5e7eb;       /* hairline above the footer */
+  --underline: #8b929e;  /* link underlines (3.13:1, the 3:1 needed to spot a link) */
+  --sep: #b8bdc5;        /* "·" separators (decorative) */
+  --photo: 0 0 0 1px rgb(0 0 0 / .06);  /* a hairline edge around the photo, no shadow */
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --max: 1100px;         /* page width */
+  --side: 240px;         /* profile column */
+  --gap: 3.5rem;         /* space between the two columns */
+  --date: 5.5rem;        /* News date column ("Sep 2026") */
+  --label: 10.5rem;      /* CV column ("May 2026 – Aug 2026") */
+  --id: 2.25rem;         /* paper id column ("C5") */
+}
+
+/* 3. Base ---------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font: 400 1rem/1.6 var(--font);
+  color: var(--fg);
+  background: var(--bg);
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color .15s, text-decoration-color .15s;
+}
+a:hover { text-decoration-color: currentColor; }
+
+/* Paper titles (and the name on the 404 page) read as links by themselves:
+   underline on hover only. Other links keep their underline, because bold
+   text that is not a link (an organisation, a venue) looks just the same. */
+a.quiet,
+.pub-title a { text-decoration-color: transparent; }
+a.quiet:hover,
+.pub-title a:hover { text-decoration-color: currentColor; }
+
+:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sep { margin: 0 .45em; color: var(--sep); }
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 1;
+  padding: .5rem .75rem;
+  background: var(--fg);
+  color: var(--bg);
+}
+.skip:focus { top: 1rem; }
+
+/* Text for screen readers only (e.g. "Conference paper" before the id "C5") */
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Small uppercase label: "Interests", CV sub-headings */
+.label,
+.part h3 {
+  margin: 0 0 .5rem;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.label { color: var(--muted); }
+
+/* 4. Layout: profile column + content column ----------------------------- */
+.page,
+.footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--side) minmax(0, 1fr);
+  column-gap: var(--gap);
+  align-items: start;
+}
+.page { padding: 3.5rem 2rem 0; }
+
+/* 5. Profile ------------------------------------------------------------- */
+/* The profile stays in view while scrolling, but only in the two-column
+   layout and when the window is tall enough to show all of it */
+@media (min-width: 861px) and (min-height: 640px) {
+  .profile { position: sticky; top: 2rem; }
+}
+
+.name {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.avatar {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 0 0 1rem;
+  box-shadow: var(--photo);
+}
+
+.role,
+.interests {
+  margin: 0 0 1rem;
+  font-size: .92rem;
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+/* Interests read "Foundation Models, Learning, Efficiency" (dots on phones).
+   The commas are real text (.comma), so copied text keeps them too. */
+.interests { padding: 0; list-style: none; }
+.interests li { display: inline; }
+
+/* Contact links: "email · github · …". The "·" sits in the gap before each
+   item; one that would start a wrapped line falls outside the box and is
+   clipped by overflow: hidden. The 4px padding keeps focus rings visible. */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1em;
+  margin: -4px 0 0 -4px;
+  padding: 4px;
+  list-style: none;
+  overflow: hidden;
+  font-size: .9rem;
+  color: var(--muted);
+}
+.links li + li::before {
+  content: "·";
+  content: "·" / "";  /* the same dot, hidden from screen readers where supported */
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  text-align: center;
+  color: var(--sep);
+}
+.links a {
+  color: inherit;
+  text-decoration-color: transparent;
+  text-transform: lowercase;
+}
+.links a:hover { color: var(--fg); text-decoration-color: currentColor; }
+
+/* 6. Sections ------------------------------------------------------------ */
+.content { min-width: 0; }
+
+.block { margin: 0 0 3rem; }
+.block:last-child { margin-bottom: 0; }
+
+.block h2,
+.title-404 {
+  margin: 0 0 1rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+}
+
+.block-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: 1rem;
+  margin-bottom: 1rem;
+}
+.block-head h2 { margin: 0; }
+.note { font-size: .85rem; color: var(--muted); }
+
+.prose p { margin: 0 0 .75rem; text-wrap: pretty; }
+.prose p:last-child { margin-bottom: 0; }
+
+.part + .part { margin-top: 2rem; }
+.part .prose { font-size: .95rem; }
+
+/* 7. Rows: News and CV lists (date | text) ------------------------------- */
+.rows { list-style: none; margin: 0; padding: 0; font-size: .95rem; }
+
+/* Only the rows themselves (> li): a list inside a row's text keeps its
+   normal layout */
+.rows > li {
+  display: grid;
+  grid-template-columns: var(--date) minmax(0, 1fr);
+  column-gap: .85rem;
+  align-items: baseline;
+  margin-bottom: .5rem;
+}
+.rows > li:last-child { margin-bottom: 0; }
+.rows-wide > li { grid-template-columns: var(--label) minmax(0, 1fr); margin-bottom: .6rem; }
+
+/* The text always goes in the last column, even in a row without a date or
+   label (-2 = the last column, also when the rows stack into one column) */
+.rows > li > div { grid-column: -2; text-wrap: pretty; }
+
+.rows time,
+.when,
+.key { color: var(--muted); font-variant-numeric: tabular-nums; }
+.rows time,
+.when { white-space: nowrap; }   /* dates never wrap; free-text keys may */
+
+.org { font-weight: 600; }
+.org,
+.by { color: var(--fg-2); }
+.sub { display: block; font-size: .88rem; line-height: 1.5; color: var(--muted); }
+.sub .sep { margin: 0; }  /* "GPA: 4.07/4.3 · 2 Year Leave …": real spaces around the dot */
+
+/* "Older news" toggle */
+.older { margin-top: .75rem; }
+.older summary {
+  display: inline-block;
+  padding: .25rem 0;
+  font-size: .9rem;
+  color: var(--muted);
+  cursor: pointer;
+  list-style: none;
+}
+.older summary::-webkit-details-marker { display: none; }
+.older summary::before {  /* small chevron, pointing down when closed */
+  content: "";
+  display: inline-block;
+  width: .4em;
+  height: .4em;
+  margin: 0 .55em .2em .1em;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+  transition: transform .15s;
+}
+.older[open] summary::before { margin-bottom: 0; transform: rotate(-135deg); }
+.older summary:hover { color: var(--fg); }
+.older[open] summary { margin-bottom: .5rem; }
+/* lined up with the news text while dates have their own column */
+@media (min-width: 521px) {
+  .older summary { margin-left: calc(var(--date) + .85rem); }
+}
+
+/* 8. Publications -------------------------------------------------------- */
+/* Each paper: its id ("C5") hangs in a narrow column left of the title */
+.pubs { margin: 0; padding: 0; list-style: none; }
+.pubs > li {
+  display: grid;
+  grid-template-columns: var(--id) minmax(0, 1fr);
+  column-gap: .9rem;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+}
+.pubs > li:last-child { margin-bottom: 0; }
+
+.pub-id {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.pub-body { grid-column: 2; min-width: 0; }  /* also when a paper has no id */
+
+/* Titles, author lists and venues wrap into lines of similar length, so a
+   last line never holds a single word or name */
+.pub-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.pub-authors { margin-top: .2rem; font-size: .92rem; line-height: 1.45; color: var(--fg-2); text-wrap: balance; }
+.pub-authors strong { color: var(--fg); }
+/* A name (with its "*" and comma) stays on one line; only a name longer than
+   the whole line wraps inside itself */
+.author { display: inline-block; max-width: 100%; }
+
+/* Venue: italic; a final "(Oral)" etc. is shown upright after a dot */
+.pub-venue { margin-top: .15rem; font-size: .88rem; line-height: 1.45; font-style: italic; text-wrap: balance; }
+.pub-venue .sep { margin: 0; }
+.honour { font-style: normal; font-weight: 600; }
+
+/* Links, then the topics; the topics move below the links when they don't fit */
+.pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.25rem;
+  margin-top: .3rem;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+.pub-links a { text-transform: lowercase; }
+.pub-tags { color: var(--muted); }
+.tag { white-space: nowrap; }  /* a topic such as "VLM-as-a-Judge" never splits */
+
+/* 9. Footer -------------------------------------------------------------- */
+.footer { padding: 4rem 2rem 3rem; }
+.footer p {
+  grid-column: 2;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: .85rem;
+  color: var(--muted);
+}
+/* real spaces around the dot (so the two parts don't run together when read
+   aloud or copied); with this margin the gap matches the other separators */
+.footer .sep { margin: 0 .17em; }
+
+/* 10. Smaller screens ---------------------------------------------------- */
+/* Small laptops and large tablets: the same two columns, with less space
+   around them */
+@media (min-width: 861px) and (max-width: 900px) {
+  :root { --gap: 2.5rem; }
+  .page,
+  .footer { padding-inline: 1.5rem; }
+}
+
+/* Phones and tablets in portrait (also a laptop window zoomed to 200%): one
+   column, compact profile header. Below 861px two columns would leave the
+   text column too narrow for the CV's date column. --max keeps lines at a
+   comfortable length on tablets. */
+@media (max-width: 860px) {
+  :root { --id: 1.75rem; --max: 46rem; }
+  .page,
+  .footer { grid-template-columns: minmax(0, 1fr); }
+  .page { row-gap: 2.5rem; padding: 2rem 1.25rem 0; }
+  .footer { padding: 3rem 1.25rem 2rem; }
+  .footer p { grid-column: 1; }
+  .footer span { display: block; }
+  .footer .sep { display: none; }
+
+  .name { font-size: 1.25rem; }
+  .avatar { width: 5.5rem; }
+
+  /* Photo on the left with the name and role centred beside it; links and
+     interests below, full width */
+  .profile.has-photo {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    grid-template-rows: 1fr auto auto 1fr auto auto auto;
+    grid-template-areas:
+      "photo ."
+      "photo name"
+      "photo role"
+      "photo ."
+      "links links"
+      "label label"
+      "interests interests";
+    column-gap: 1.125rem;
+  }
+  .has-photo .avatar { grid-area: photo; margin: 0; }
+  .has-photo .name { grid-area: name; margin-bottom: .3rem; }
+  .has-photo .role { grid-area: role; margin: 0; }
+  .has-photo .links { grid-area: links; margin-top: .6rem; }
+  .has-photo .label { grid-area: label; margin: .35rem 0 .2rem; }
+  .has-photo .interests { grid-area: interests; margin: 0; }
+
+  .interests {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    overflow: hidden;
+  }
+  .interests .comma { display: none; }
+  .interests li + li::before {  /* same dot-in-the-gap trick as .links */
+    content: "·";
+    content: "·" / "";
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    text-align: center;
+    color: var(--sep);
+  }
+
+  .pubs > li { column-gap: .7rem; }
+
+  /* comfortable tap targets */
+  .links a { display: inline-block; padding: .65rem 0; }
+  .older summary { padding: .65rem 0; }
+  .pub-meta { font-size: .85rem; }
+  /* paper links: tap targets over 40px tall; the negative margin cancels the
+     padding's effect on the layout, so the lines keep their spacing */
+  .pub-links a { display: inline-block; padding: .65rem .2rem; margin: -.65rem -.2rem; }
+}
+
+/* Phones: dates and labels go above the text (News and CV alike) */
+@media (max-width: 520px) {
+  .rows > li { grid-template-columns: minmax(0, 1fr); margin-bottom: .75rem; }
+  .rows > li > time,
+  .when,
+  .key { font-size: .88rem; }
+}
+
+/* 11. Dark mode (follows the operating system setting) ------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111111;
+    --fg: #ececec;         /* 16.0:1 */
+    --fg-2: #c4c7cc;       /* 11.1:1 */
+    --muted: #9ca3af;      /* 7.44:1 */
+    --line: #2a2a2a;
+    --underline: #5f646c;  /* 3.17:1 */
+    --sep: #4b4b4b;
+    --photo: 0 0 0 1px rgb(255 255 255 / .1);  /* a hairline ring, not a shadow */
+  }
+}
+
+/* 12. Reduced motion ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}

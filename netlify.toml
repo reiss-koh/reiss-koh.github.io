@@ -1,21 +1,7 @@
+# The site moved to GitHub Pages; the old Netlify site keeps serving its last (Hugo Blox) deploy.
+# "ignore" makes Netlify skip the builds that pushes start. A build that skips that check (for example
+# one started by a build hook) runs "command", which fails on purpose, so nothing new is ever published.
+# Once the Netlify site is deleted, this file is unnecessary and can be removed.
 [build]
-  command = "hugo --gc --minify -b $URL && npx pagefind --source 'public'"
-  publish = "public"
-
-[build.environment]
-  HUGO_VERSION = "0.135.0"
-  HUGO_ENABLEGITINFO = "true"
-
-[context.production.environment]
-  HUGO_ENV = "production"
-
-[context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL && npx pagefind --source 'public'"
-
-[context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL && npx pagefind --source 'public'"
-
-[[plugins]]
-  package = "netlify-plugin-hugo-cache-resources"
-  [plugins.inputs]
-    debug = true
+  ignore = "exit 0"
+  command = "echo 'This site moved to GitHub Pages; Netlify keeps serving its last deploy.' && exit 1"

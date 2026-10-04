@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+  <div class="page">
+    <header class="profile">
+      <p class="name"><a class="quiet" href="{{ "" | relURL }}">{{ (hugo.Data.profile | default dict).name | default site.Title }}</a></p>
+    </header>
+    <main class="content">
+      <h1 class="title-404">Page not found</h1>
+      <div class="prose">
+        <p>Sorry, there is nothing at this address. The page may have moved, or the link may be mistyped.</p>
+        <p><a href="{{ "" | relURL }}">← Back to the homepage</a></p>
+      </div>
+    </main>
+  </div>
+  {{ partial "footer.html" . }}
+</body>
+</html>

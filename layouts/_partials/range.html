@@ -1,0 +1,7 @@
+{{- /* "Sep 2025 – Present" for a CV entry. An empty end means Present when there
+       is a start; an empty start shows the end only; with neither, nothing is
+       shown. "where" names the entry in error messages.
+       Usage: partial "range.html" (dict "entry" . "where" "data/cv.yaml, experience \"Research Intern\"") */ -}}
+{{- $e := .entry -}}
+{{- with $e.start }}{{ partial "date.html" (dict "date" . "where" (printf "%s, start" $.where)) }} – {{ end -}}
+{{- with $e.end }}{{ partial "date.html" (dict "date" . "where" (printf "%s, end" $.where)) }}{{ else }}{{ if $e.start }}Present{{ end }}{{ end -}}

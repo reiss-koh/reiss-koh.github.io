@@ -1,0 +1,23 @@
+{{- /* The profile photo (photo in data/profile.yaml), cropped to a square and
+       resized here, so any JPG or PNG in assets/ works, whatever its size.
+       Returns src and srcset for <img>, and abs (the full address) for link
+       previews. A web address (https://…) is used as it is. */ -}}
+{{- $f := "data/profile.yaml" -}}
+{{- $photo := strings.TrimSpace (printf "%v" (.photo | default "")) -}}
+{{- $out := dict -}}
+{{- with $photo -}}
+  {{- if findRE `^([a-zA-Z][a-zA-Z0-9+.-]*:|//)` . 1 -}}
+    {{- $out = dict "src" . "abs" . -}}
+  {{- else -}}
+    {{- with resources.Get (strings.TrimPrefix "/" .) -}}
+      {{- /* phone photos are often stored sideways with a "rotate me" tag */ -}}
+      {{- $img := . | images.Filter images.AutoOrient -}}
+      {{- $small := $img.Fill "320x320 Center q85 jpg" -}}
+      {{- $large := $img.Fill "640x640 Center q85 jpg" -}}
+      {{- $out = dict "src" $large.RelPermalink "abs" $large.Permalink "srcset" (printf "%s 320w, %s 640w" $small.RelPermalink $large.RelPermalink) -}}
+    {{- else -}}
+      {{- errorf "%s: the photo %q is not in the assets/ folder. Upload it there with exactly that name (upper and lower case included, e.g. .png rather than .PNG), or change photo to the name of the uploaded file." $f . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}
