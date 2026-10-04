@@ -17,3 +17,5 @@ enableRobotsTXT = true
   newsVisible = 8
   # Emoji at the end of news items: true shows them, false hides them.
   newsEmoji = false
+  # Google Search Console ownership check (the content="…" code it gives you)
+  googleSiteVerification = "loduRBHCL93eVhS0WH7kEMDTn1sh6AocuGZU9a5E9f0"

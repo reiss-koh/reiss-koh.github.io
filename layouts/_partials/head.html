@@ -19,6 +19,9 @@
 <link rel="canonical" href="{{ .Permalink }}">
 {{- end }}
 <meta name="color-scheme" content="light">
+{{- with site.Params.googleSiteVerification }}
+<meta name="google-site-verification" content="{{ . }}">
+{{- end }}
 <meta name="theme-color" content="#ffffff">
 {{- /* A light or dark theme picked with the toggle (theme.html), applied before the page is drawn */}}
 <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
