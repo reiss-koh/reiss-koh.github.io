@@ -34,8 +34,8 @@ Dates are `"YYYY-MM"`, for example `"2026-10"` (a full date such as `"2026-10-15
 Sidebar links appear as written, in the order listed in `data/profile.yaml`. Keep the labels short (`Scholar`,
 not `Google Scholar`) so that all of them fit on one line.
 
-The light/dark toggle (top right of the sidebar) follows the visitor's system setting until they click it;
-their choice is remembered in their browser.
+The site opens in light mode; the toggle (top right of the sidebar) switches to dark mode, and a visitor's
+choice is remembered in their browser.
 
 ## Copy-paste snippets
 

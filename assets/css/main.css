@@ -68,7 +68,7 @@
   --sep: #b8bdc5;        /* "·" separators (decorative) */
   --photo: 0 0 0 1px rgb(0 0 0 / .06);  /* a hairline edge around the photo, no shadow */
   --topic: #52525b;      /* topics in the About text (7.7:1) */
-  --venue: #1e3a8a;      /* publication venues: navy (10.4:1) */
+  --venue: #2563eb;      /* publication venues: blue (5.2:1) */
   --hover: rgb(0 0 0 / .05);  /* light tint behind the theme toggle on hover */
   --moon: block;         /* theme toggle icon: moon in light mode ... */
   --sun: none;           /* ... sun in dark mode */
@@ -577,9 +577,8 @@ a.quiet:hover,
 }
 
 /* 11. Dark mode ---------------------------------------------------------- */
-/* Follows the operating system setting, unless the visitor picked light or
-   dark with the toggle (saved as data-theme on <html>). The two blocks hold
-   the same colors: keep them in sync. */
+/* The site starts in light mode; dark mode is on when the visitor picks it
+   with the toggle (saved as data-theme="dark" on <html>). */
 :root[data-theme="dark"] {
   --bg: #111111;
   --fg: #ececec;         /* 16.0:1 */
@@ -595,24 +594,6 @@ a.quiet:hover,
   --moon: none;
   --sun: block;
   color-scheme: dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #111111;
-    --fg: #ececec;
-    --fg-2: #c4c7cc;
-    --muted: #9ca3af;
-    --line: #2a2a2a;
-    --underline: #5f646c;
-    --sep: #4b4b4b;
-    --photo: 0 0 0 1px rgb(255 255 255 / .1);
-    --topic: #b4b4bc;      /* topics in the About text (9.4:1) */
-  --venue: #93c5fd;      /* publication venues: light blue (11.3:1) */
-  --hover: rgb(255 255 255 / .08);
-    --moon: none;
-    --sun: block;
-    color-scheme: dark;
-  }
 }
 
 /* 12. Reduced motion ---------------------------------------------------- */
