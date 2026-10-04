@@ -46,13 +46,21 @@
 </section>
 {{- end }}
 
-{{- /* Education, service, mentoring, awards and the More About Me text
-       (content/more-about-me.md) come last, folded into a "See More" section
-       (<details>, no JavaScript): click its heading to open it */}}
-{{- $more := "" }}
-{{- $moreTitle := "More About Me" }}
-{{- with site.GetPage "/more-about-me" }}{{ $more = .Content }}{{ $moreTitle = .Title | default $moreTitle }}{{ end }}
-{{- if or $education $service $mentees $awards $more }}
+{{- /* More About Me (content/more-about-me.md), its own section */}}
+{{- with site.GetPage "/more-about-me" }}
+{{- $title := .Title | default "More About Me" }}
+{{- with .Content }}
+<section class="block" aria-labelledby="more-about-me">
+  <h2 id="more-about-me">{{ $title }}</h2>
+  <div class="prose">{{ . }}</div>
+</section>
+{{- end }}
+{{- end }}
+
+{{- /* Education, service, mentoring and awards come last, folded into a
+       "See More" section (<details>, no JavaScript): click its heading to
+       open it */}}
+{{- if or $education $service $mentees $awards }}
 <section class="block" aria-labelledby="see-more">
   <details class="see-more">
     <summary><h2 id="see-more">See More</h2></summary>
@@ -116,12 +124,6 @@
         </li>
         {{- end }}
       </ul>
-    </div>
-    {{- end }}
-    {{- with $more }}
-    <div class="part">
-      <h3 id="more-about-me">{{ $moreTitle }}</h3>
-      <div class="prose">{{ . }}</div>
     </div>
     {{- end }}
   </details>
