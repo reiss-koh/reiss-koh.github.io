@@ -219,18 +219,17 @@ a.quiet:hover,
   text-wrap: balance;
 }
 
-/* Location: a map-pin icon, then one place per line */
+/* Location: one place per line, each after a map-pin icon */
 .location {
-  display: flex;
-  align-items: flex-start;
-  gap: .35rem;
   margin: -.5rem 0 1rem;
+  padding: 0;
+  list-style: none;
   font-size: .9rem;
   line-height: 1.5;
   color: var(--muted);
 }
-.location svg { flex: none; width: .95rem; height: .95rem; margin-top: .2rem; }
-.places { margin: 0; padding: 0; list-style: none; }
+.location li { display: flex; align-items: center; gap: .35rem; }
+.location svg { flex: none; width: .95rem; height: .95rem; }
 
 /* Interests read "Foundation Models, Learning, Efficiency" (dots on phones).
    The commas are real text (.comma), so copied text keeps them too. */
@@ -273,6 +272,7 @@ a.quiet:hover,
 .block:last-child { margin-bottom: 0; }
 
 .block > h2,
+.see-more summary h2,
 .page-title,
 .title-404 {
   margin: 0 0 1rem;
@@ -321,11 +321,9 @@ a.quiet:hover,
 .sub { display: block; font-size: .88rem; line-height: 1.5; color: var(--muted); }
 .sub .sep { margin: 0; }  /* "GPA: 4.07/4.3 · 2 Year Leave …": real spaces around the dot */
 
-/* "Older news" and "See More" (awards, at the end) toggles */
+/* "Older news" toggle */
 .older { margin-top: .75rem; }
-.see-more { margin-top: 2rem; }
-.older summary,
-.see-more summary {
+.older summary {
   display: inline-block;
   padding: .25rem 0;
   font-size: .9rem;
@@ -333,11 +331,8 @@ a.quiet:hover,
   cursor: pointer;
   list-style: none;
 }
-.see-more summary { font-size: .95rem; }
-.older summary::-webkit-details-marker,
-.see-more summary::-webkit-details-marker { display: none; }
-.older summary::before,
-.see-more summary::before {  /* small chevron, pointing down when closed */
+.older summary::-webkit-details-marker { display: none; }
+.older summary::before {  /* small chevron, pointing down when closed */
   content: "";
   display: inline-block;
   width: .4em;
@@ -348,12 +343,35 @@ a.quiet:hover,
   transform: rotate(45deg);
   transition: transform .15s;
 }
-.older[open] summary::before,
-.see-more[open] summary::before { margin-bottom: 0; transform: rotate(-135deg); }
-.older summary:hover,
-.see-more summary:hover { color: var(--fg); }
+.older[open] summary::before { margin-bottom: 0; transform: rotate(-135deg); }
+.older summary:hover { color: var(--fg); }
 .older[open] summary { margin-bottom: .5rem; }
-.see-more[open] summary { margin-bottom: 1rem; }
+
+/* "See More" at the end: a section heading that opens and closes the section,
+   with a chevron after it */
+.see-more summary {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  width: fit-content;
+  cursor: pointer;
+  list-style: none;
+}
+.see-more summary::-webkit-details-marker { display: none; }
+.see-more summary h2 { margin: 0; }
+.see-more summary::after {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  margin-bottom: .3rem;
+  border: solid var(--muted);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  transition: transform .15s, border-color .15s;
+}
+.see-more summary:hover::after { border-color: var(--fg); }
+.see-more[open] summary::after { margin: .3rem 0 0; transform: rotate(-135deg); }
+.see-more[open] summary { margin-bottom: 1.25rem; }
 /* lined up with the news text while dates have their own column */
 @media (min-width: 521px) {
   .older summary { margin-left: calc(var(--date) + .85rem); }
@@ -536,8 +554,7 @@ a.quiet:hover,
   .links a { display: inline-block; padding: .65rem .45rem; margin: 0 -.45rem; }
   .more a,
   .back a { display: inline-block; padding: .6rem 0; margin: -.6rem 0; }
-  .older summary,
-  .see-more summary { padding: .65rem 0; }
+  .older summary { padding: .65rem 0; }
   .pub-meta { font-size: .85rem; }
   /* paper links: tap targets over 40px tall; the negative margin cancels the
      padding's effect on the layout, so the lines keep their spacing */

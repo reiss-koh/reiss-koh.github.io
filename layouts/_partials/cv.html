@@ -1,7 +1,7 @@
-{{- /* Experience, education, service, mentoring, collaboration, then awards in
-       a "See More" toggle (data/cv.yaml), grouped under one "CV" heading. Every
-       entry is checked by items.html (an award needs a title; a service or
-       mentee line a text).
+{{- /* The CV (data/cv.yaml): experience, education, mentoring and collaboration
+       under one "CV" heading, then service, awards and More About Me in a
+       "See More" section at the end. Every entry is checked by items.html (an
+       award needs a title; a service or mentee line a text).
        Empty lists are skipped; when everything is empty the section is dropped. */ -}}
 {{- $f := "data/cv.yaml" -}}
 {{- $cv := hugo.Data.cv | default dict -}}
@@ -14,7 +14,7 @@
 {{- $awards := partial "items.html" (dict "list" $cv.awards "where" (printf "%s, awards" $f) "need" (slice "title")) -}}
 {{- $service := partial "items.html" (dict "list" $cv.service "where" (printf "%s, service" $f) "need" (slice "text")) -}}
 {{- $mentees := partial "items.html" (dict "list" $cv.mentees "where" (printf "%s, mentees" $f) "need" (slice "text")) -}}
-{{- if or $experience $education $awards $service $mentees $cv.collaboration }}
+{{- if or $experience $education $mentees $cv.collaboration }}
 <section class="block" aria-labelledby="cv">
   <h2 id="cv">CV</h2>
 
@@ -63,17 +63,6 @@
   </div>
   {{- end }}
 
-  {{- with $service }}
-  <div class="part">
-    <h3 id="service">Service</h3>
-    <ul class="rows rows-wide">
-      {{- range . }}
-      <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>
-      {{- end }}
-    </ul>
-  </div>
-  {{- end }}
-
   {{- with $mentees }}
   <div class="part">
     <h3 id="mentoring">Undergraduate Mentoring</h3>
@@ -91,11 +80,30 @@
     <div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>
   </div>
   {{- end }}
-  {{- /* Awards come last, folded into a "See More" toggle (<details>, no
-         JavaScript); click it to open */}}
-  {{- with $awards }}
+</section>
+{{- end }}
+
+{{- /* Service, awards and the More About Me text (content/more-about-me.md) come
+       last, folded into a "See More" section (<details>, no JavaScript): click
+       its heading to open it */}}
+{{- $more := "" }}
+{{- $moreTitle := "More About Me" }}
+{{- with site.GetPage "/more-about-me" }}{{ $more = .Content }}{{ $moreTitle = .Title | default $moreTitle }}{{ end }}
+{{- if or $service $awards $more }}
+<section class="block" aria-labelledby="see-more">
   <details class="see-more">
-    <summary>See More</summary>
+    <summary><h2 id="see-more">See More</h2></summary>
+    {{- with $service }}
+    <div class="part">
+      <h3 id="service">Service</h3>
+      <ul class="rows rows-wide">
+        {{- range . }}
+        <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+    {{- with $awards }}
     <div class="part">
       <h3 id="awards">Awards</h3>
       <ul class="rows rows-wide">
@@ -112,7 +120,13 @@
         {{- end }}
       </ul>
     </div>
+    {{- end }}
+    {{- with $more }}
+    <div class="part">
+      <h3 id="more-about-me">{{ $moreTitle }}</h3>
+      <div class="prose">{{ . }}</div>
+    </div>
+    {{- end }}
   </details>
-  {{- end }}
 </section>
 {{- end }}
