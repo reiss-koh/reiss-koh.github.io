@@ -1,6 +1,6 @@
-{{- /* From data/cv.yaml: experience, mentoring and collaboration under the
-       "Experience" heading, then education, service, awards and More About Me
-       in a "See More" section at the end. Every entry is checked by items.html (an
+{{- /* From data/cv.yaml: experience (and collaboration) under the "Experience"
+       heading, then education, service, mentoring, awards and More About Me in
+       a "See More" section at the end. Every entry is checked by items.html (an
        award needs a title; a service or mentee line a text).
        Empty lists are skipped; when everything is empty the section is dropped. */ -}}
 {{- $f := "data/cv.yaml" -}}
@@ -14,7 +14,7 @@
 {{- $awards := partial "items.html" (dict "list" $cv.awards "where" (printf "%s, awards" $f) "need" (slice "title")) -}}
 {{- $service := partial "items.html" (dict "list" $cv.service "where" (printf "%s, service" $f) "need" (slice "text")) -}}
 {{- $mentees := partial "items.html" (dict "list" $cv.mentees "where" (printf "%s, mentees" $f) "need" (slice "text")) -}}
-{{- if or $experience $mentees $cv.collaboration }}
+{{- if or $experience $cv.collaboration }}
 <section class="block" aria-labelledby="experience">
   <h2 id="experience">Experience</h2>
 
@@ -37,17 +37,6 @@
   </div>
   {{- end }}
 
-  {{- with $mentees }}
-  <div class="part">
-    <h3 id="mentoring">Undergraduate Mentoring</h3>
-    <ul class="rows rows-wide">
-      {{- range . }}
-      <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>
-      {{- end }}
-    </ul>
-  </div>
-  {{- end }}
-
   {{- with $cv.collaboration }}
   <div class="part">
     <h3 id="collaboration">Collaboration</h3>
@@ -57,13 +46,13 @@
 </section>
 {{- end }}
 
-{{- /* Education, service, awards and the More About Me text
+{{- /* Education, service, mentoring, awards and the More About Me text
        (content/more-about-me.md) come last, folded into a "See More" section
        (<details>, no JavaScript): click its heading to open it */}}
 {{- $more := "" }}
 {{- $moreTitle := "More About Me" }}
 {{- with site.GetPage "/more-about-me" }}{{ $more = .Content }}{{ $moreTitle = .Title | default $moreTitle }}{{ end }}
-{{- if or $education $service $awards $more }}
+{{- if or $education $service $mentees $awards $more }}
 <section class="block" aria-labelledby="see-more">
   <details class="see-more">
     <summary><h2 id="see-more">See More</h2></summary>
@@ -94,6 +83,16 @@
     {{- with $service }}
     <div class="part">
       <h3 id="service">Service</h3>
+      <ul class="rows rows-wide">
+        {{- range . }}
+        <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+    {{- with $mentees }}
+    <div class="part">
+      <h3 id="mentoring">Undergraduate Mentoring</h3>
       <ul class="rows rows-wide">
         {{- range . }}
         <li>{{ with .label }}<span class="key">{{ . }}</span>{{ end }}<div>{{ .text }}</div></li>

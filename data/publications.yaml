@@ -74,7 +74,6 @@
   pdf: "https://arxiv.org/abs/2410.18652"
   code: "https://github.com/chartsquared/C-2"
   project: "https://chartsquared.github.io/"
-  video: "https://youtu.be/xZls5ghmB14?si=-fCHF9CjD_A7ZVXm"
 
 - id: "C1"
   title: "FlickerFusion: Intra-trajectory Domain Generalizing Multi-Agent RL"
