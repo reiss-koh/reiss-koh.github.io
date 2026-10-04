@@ -11,20 +11,20 @@
 - date: "2026-09"
   text: "Thanks to [**Elvis**](https://lnkd.in/p/gbyKRvYt), [**Hao**](https://lnkd.in/p/gAFV49yB), [**alphaXiv**](https://x.com/askalphaxiv/status/2095678236722098292?s=20), and [**Lan**](https://lnkd.in/p/gpUPaiCs) for highlighting [**Declarative Attention**](https://arxiv.org/pdf/2609.02737)! 👀"
 
-- date: "2026-07"
-  text: "Presenting at **ICML 2026** in Seoul. 🌃"
+# - date: "2026-07"
+#   text: "Presenting at **ICML 2026** in Seoul. 🌃"
 
 - date: "2026-06"
   text: "[**gWorld**](https://trillionlabs-gworld.github.io/) cited and adopted by [**Qwen-AgentWorld**](https://arxiv.org/pdf/2606.24597), and surpasses **9K** total downloads (including community quantized versions)! 🌐"
 
-- date: "2026-05"
-  text: "Accepted offer joining **LG AI Research, Superintelligence Lab** as a Research Scientist Intern this summer. ☀️"
+# - date: "2026-05"
+#   text: "Accepted offer joining **LG AI Research, Superintelligence Lab** as a Research Scientist Intern this summer. ☀️"
 
-- date: "2026-05"
-  text: "Received **Silver Reviewer Award** from **ICML 2026**. 🥈"
+# - date: "2026-05"
+#   text: "Received **Silver Reviewer Award** from **ICML 2026**. 🥈"
 
-- date: "2026-05"
-  text: "Accepted offer joining **Amazon AGI (Bellevue)** as an Applied Scientist (L5) Intern this fall. ⛰️"
+# - date: "2026-05"
+#   text: "Accepted offer joining **Amazon AGI (Bellevue)** as an Applied Scientist (L5) Intern this fall. ⛰️"
 
 - date: "2026-05"
   text: "[**gWorld**](https://trillionlabs-gworld.github.io/) has been accepted to **ICML 2026**! 🎉"
@@ -38,11 +38,11 @@
 - date: "2026-02"
   text: "Released [**gWorld**](https://trillionlabs-gworld.github.io) [**8B**](https://huggingface.co/trillionlabs/gWorld-8B) and [**32B**](https://huggingface.co/trillionlabs/gWorld-32B), the first open-weight (pareto-frontier) visual mobile GUI world models! 🌎"
 
-- date: "2026-01"
-  text: "[**rBridge**](https://arxiv.org/pdf/2509.21013) has been accepted to **ICLR 2026**! 🎉"
+# - date: "2026-01"
+#   text: "[**rBridge**](https://arxiv.org/pdf/2509.21013) has been accepted to **ICLR 2026**! 🎉"
 
-- date: "2025-12"
-  text: "Presenting at **NeurIPS 2025** with the **Scholar Award** in San Diego. 🏖️"
+# - date: "2025-12"
+#   text: "Presenting at **NeurIPS 2025** with the **Scholar Award** in San Diego. 🏖️"
 
 - date: "2025-10"
   text: "[**rBridge**](https://arxiv.org/pdf/2509.21013) featured in over 10 [news outlets](https://koreatechdesk.com/korea-trillion-labs-rbridge-ai-cost-efficiency-breakthrough) for **>100×** efficiency in scaling pre-training recipe search! 📰"
@@ -50,26 +50,26 @@
 - date: "2025-10"
   text: "[**rBridge**](https://arxiv.org/pdf/2509.21013) is on the front page of [r/LocalLLaMA](https://www.reddit.com/r/LocalLLaMA/comments/1od0jw1/r_we_figured_out_how_to_predict_32b_model/)! 🔥"
 
-- date: "2025-09"
-  text: "[**AdaSTaR**](https://arxiv.org/pdf/2505.16322) has been accepted to **NeurIPS 2025**! 🎉"
+# - date: "2025-09"
+#   text: "[**AdaSTaR**](https://arxiv.org/pdf/2505.16322) has been accepted to **NeurIPS 2025**! 🎉"
 
-- date: "2025-06"
-  text: "Joined [Trillion Labs](https://trillionlabs.co/) as a Research Intern. 🌟"
+# - date: "2025-06"
+#   text: "Joined [Trillion Labs](https://trillionlabs.co/) as a Research Intern. 🌟"
 
-- date: "2025-04"
-  text: "Presenting at **NAACL 2025** in Albuquerque. 🏜️"
+# - date: "2025-04"
+#   text: "Presenting at **NAACL 2025** in Albuquerque. 🏜️"
 
-- date: "2025-04"
-  text: "Presenting at **ICLR 2025** in Singapore. 🌞"
+# - date: "2025-04"
+#   text: "Presenting at **ICLR 2025** in Singapore. 🌞"
 
-- date: "2025-01"
-  text: "[**C²**](https://chartsquared.github.io) has been accepted to **NAACL 2025** as an **Oral** presentation! 🎉"
+# - date: "2025-01"
+#   text: "[**C²**](https://chartsquared.github.io) has been accepted to **NAACL 2025** as an **Oral** presentation! 🎉"
 
-- date: "2025-01"
-  text: "[**FlickerFusion**](https://flickerfusion305.github.io) has been accepted to **ICLR 2025**! 🎉"
+# - date: "2025-01"
+#   text: "[**FlickerFusion**](https://flickerfusion305.github.io) has been accepted to **ICLR 2025**! 🎉"
 
-- date: "2024-02"
-  text: "Presenting at **AAAI 2024 Workshop** in Vancouver. 🍁"
+# - date: "2024-02"
+#   text: "Presenting at **AAAI 2024 Workshop** in Vancouver. 🍁"
 
-- date: "2024-01"
-  text: "Our [**paper**](https://www.sciencedirect.com/science/article/abs/pii/S0952197623015622) has been accepted to **Engineering Applications of Artificial Intelligence**! 🎉"
+# - date: "2024-01"
+#   text: "Our [**paper**](https://www.sciencedirect.com/science/article/abs/pii/S0952197623015622) has been accepted to **Engineering Applications of Artificial Intelligence**! 🎉"
