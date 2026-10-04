@@ -1,6 +1,7 @@
-{{- /* Experience, education, awards, service, mentoring and collaboration
-       (data/cv.yaml), grouped under one "CV" heading. Every entry is checked by
-       items.html (an award needs a title; a service or mentee line a text).
+{{- /* Experience, education, service, mentoring, collaboration, then awards in
+       a "See More" toggle (data/cv.yaml), grouped under one "CV" heading. Every
+       entry is checked by items.html (an award needs a title; a service or
+       mentee line a text).
        Empty lists are skipped; when everything is empty the section is dropped. */ -}}
 {{- $f := "data/cv.yaml" -}}
 {{- $cv := hugo.Data.cv | default dict -}}
@@ -62,25 +63,6 @@
   </div>
   {{- end }}
 
-  {{- with $awards }}
-  <div class="part">
-    <h3 id="awards">Awards</h3>
-    <ul class="rows rows-wide">
-      {{- range . }}
-      <li>
-        {{- with partial "date.html" (dict "date" .date "where" (printf "%s, award \"%v\"" $f .title)) }}
-        <span class="when">{{ . }}</span>
-        {{- end }}
-        <div>
-          {{- .title }}{{ with .by }}, <span class="by">{{ . }}</span>{{ end }}
-          {{- with .note }} <span class="sub">{{ . }}</span>{{ end -}}
-        </div>
-      </li>
-      {{- end }}
-    </ul>
-  </div>
-  {{- end }}
-
   {{- with $service }}
   <div class="part">
     <h3 id="service">Service</h3>
@@ -108,6 +90,29 @@
     <h3 id="collaboration">Collaboration</h3>
     <div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>
   </div>
+  {{- end }}
+  {{- /* Awards come last, folded into a "See More" toggle (<details>, no
+         JavaScript); click it to open */}}
+  {{- with $awards }}
+  <details class="see-more">
+    <summary>See More</summary>
+    <div class="part">
+      <h3 id="awards">Awards</h3>
+      <ul class="rows rows-wide">
+        {{- range . }}
+        <li>
+          {{- with partial "date.html" (dict "date" .date "where" (printf "%s, award \"%v\"" $f .title)) }}
+          <span class="when">{{ . }}</span>
+          {{- end }}
+          <div>
+            {{- .title }}{{ with .by }}, <span class="by">{{ . }}</span>{{ end }}
+            {{- with .note }} <span class="sub">{{ . }}</span>{{ end -}}
+          </div>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </details>
   {{- end }}
 </section>
 {{- end }}

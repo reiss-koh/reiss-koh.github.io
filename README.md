@@ -74,7 +74,8 @@ The newest 8 items are shown (`newsVisible` in `hugo.toml`); older ones move int
 - Links are optional, so keep only the ones you have: `pdf`, `code`, `project`, `dataset`, `video`,
   `slides`, `poster`, `blog`. They always show in that order. The title links to the `pdf` (or else the `project`, else the `code`).
 
-**Award:** paste it right under the existing `awards:` line in `data/cv.yaml`, so that it comes first,
+**Award:** awards are shown at the very end of the page, inside the collapsed **See More** toggle.
+Paste the snippet right under the existing `awards:` line in `data/cv.yaml`, so that it comes first,
 lined up with the existing entries (two spaces before the `-`). `note` is an optional extra line; leave it `""` for none.
 
 ```yaml
