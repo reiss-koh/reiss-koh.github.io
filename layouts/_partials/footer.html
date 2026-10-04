@@ -1,6 +1,5 @@
-{{- /* The site's content (text, photo) is under CC0: anyone may reuse it, no
-       credit needed (so no "©" line). The code is under the MIT license in
-       LICENSE.md. */ -}}
+{{- /* The site's content (text, photo) is under CC BY 4.0: free to reuse, with
+       credit. The code is under the MIT license in LICENSE.md. */ -}}
 <footer class="footer">
-  <p><span>{{ (hugo.Data.profile | default dict).name | default site.Title }}</span> <span class="sep" aria-hidden="true">·</span> <span>Free to use (<a href="https://creativecommons.org/publicdomain/zero/1.0/" rel="license">CC0</a>)</span> <span class="sep" aria-hidden="true">·</span> <span>Last updated {{ now.Format "January 2006" }}</span></p>
+  <p><span>© {{ now.Year }} {{ (hugo.Data.profile | default dict).name | default site.Title }}</span> <span class="sep" aria-hidden="true">·</span> <span>Free to use (<a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a>)</span> <span class="sep" aria-hidden="true">·</span> <span>Last updated {{ now.Format "January 2006" }}</span></p>
 </footer>
