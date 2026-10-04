@@ -1,0 +1,51 @@
+{{- /* A list of papers (text only), used on the homepage and on the More
+       Publications page. The id ("C5") hangs in the left margin; the title links
+       to the pdf, else the project page, else the code.
+       Usage: partial "pub-list.html" (dict "papers" $papers "prefix" "paper") */ -}}
+{{- $prefix := .prefix | default "paper" }}
+{{- $linkKinds := slice "pdf" "code" "project" "dataset" "video" "slides" "poster" "blog" }}
+{{- $idKinds := dict "C" "Conference paper" "J" "Journal article" "W" "Workshop paper" "P" "Preprint" }}
+<ul class="pubs">
+  {{- range $i, $pub := $.papers }}
+  {{- /* paper-1, paper-2, …: lets each paper's links name the paper they belong to */}}
+  {{- $titleID := printf "%s-%d" $prefix (add $i 1) }}
+  {{- $where := printf "data/publications.yaml, paper %q" (printf "%v" (.id | default .title)) }}
+  <li>
+    {{- with .id }}
+    {{- /* the paper type, e.g. "Conference paper": a tooltip, and read out by screen readers */}}
+    {{- $kind := index $idKinds (upper (substr . 0 1)) }}
+    <span class="pub-id"{{ with $kind }} title="{{ . }}"{{ end }}>{{ with $kind }}<span class="vh">{{ . }} </span>{{ end }}{{ . }}</span>
+    {{- end }}
+    <div class="pub-body">
+      <h3 class="pub-title" id="{{ $titleID }}">
+        {{- with or .pdf .project .code }}<a href="{{ partial "url.html" . }}">{{ $pub.title }}</a>{{ else }}{{ .title }}{{ end -}}
+      </h3>
+      {{- with .authors }}
+      <p class="pub-authors">{{ partial "authors.html" (dict "authors" . "where" (printf "%s, authors" $where)) }}</p>
+      {{- end }}
+      {{- with .venue }}
+      <p class="pub-venue">{{ partial "venue.html" . }}</p>
+      {{- end }}
+      {{- $links := slice }}
+      {{- range $linkKinds }}{{ if index $pub . }}{{ $links = $links | append . }}{{ end }}{{ end }}
+      {{- $tags := partial "list.html" (dict "items" .tags "where" (printf "%s, tags" $where)) }}
+      {{- if or $links $tags }}
+      <p class="pub-meta">
+        {{- with $links }}
+        <span class="pub-links">
+          {{- range $j, $kind := . }}
+          {{- if $j }}<span class="sep" aria-hidden="true">·</span>{{ end -}}
+          <a href="{{ partial "url.html" (index $pub $kind) }}" aria-describedby="{{ $titleID }}">{{ $kind }}</a>
+          {{- end -}}
+        </span>
+        {{- end }}
+        {{- with $tags }}
+        {{- /* one span per topic, so that a topic never breaks across two lines */}}
+        <span class="pub-tags">{{ range $k, $t := . }}{{ if $k }}, {{ end }}<span class="tag">{{ $t }}</span>{{ end }}</span>
+        {{- end -}}
+      </p>
+      {{- end }}
+    </div>
+  </li>
+  {{- end }}
+</ul>

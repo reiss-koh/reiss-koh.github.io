@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="page">
+    {{ partial "profile.html" . }}
+    <main id="content" class="content">
+      {{- /* The papers that are not on the homepage (see pub-selected.html),
+             grouped by the first letter of their id */}}
+      {{- $others := slice }}
+      {{- range partial "items.html" (dict "list" hugo.Data.publications "need" (slice "title")) }}
+        {{- if not (partial "pub-selected.html" .) }}{{ $others = $others | append . }}{{ end }}
+      {{- end }}
+      <section class="block" aria-labelledby="page-title">
+        <h1 class="page-title" id="page-title">{{ .Title }}</h1>
+        {{- $groups := slice (dict "letter" "J" "name" "Journal articles") (dict "letter" "W" "name" "Workshop papers") (dict "letter" "C" "name" "Conference papers") (dict "letter" "P" "name" "Preprints") }}
+        {{- range $g := $groups }}
+          {{- $papers := slice }}
+          {{- range $others }}
+            {{- if eq (upper (substr (printf "%v" (.id | default "")) 0 1)) $g.letter }}{{ $papers = $papers | append . }}{{ end }}
+          {{- end }}
+          {{- with $papers }}
+        <div class="group">
+          <h2 id="{{ lower $g.letter }}">{{ $g.name }}</h2>
+          {{ partial "pub-list.html" (dict "papers" . "prefix" (printf "paper-%s" (lower $g.letter))) }}
+        </div>
+          {{- end }}
+        {{- end }}
+        {{- /* papers whose id starts with another letter, or have no id */}}
+        {{- $rest := slice }}
+        {{- range $others }}{{ if not (in (slice "J" "W" "C" "P") (upper (substr (printf "%v" (.id | default "")) 0 1))) }}{{ $rest = $rest | append . }}{{ end }}{{ end }}
+        {{- with $rest }}
+        <div class="group">
+          <h2 id="other">Other</h2>
+          {{ partial "pub-list.html" (dict "papers" . "prefix" "paper-o") }}
+        </div>
+        {{- end }}
+        <p class="back"><a href="{{ site.Home.RelPermalink }}">← Back to the homepage</a></p>
+      </section>
+    </main>
+  </div>
+  {{ partial "footer.html" . }}
+</body>
+</html>

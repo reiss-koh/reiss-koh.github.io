@@ -157,6 +157,3 @@ service:
 mentees:
   - label: "2026"
     text: "Gilles Massoulié (ENSAE Paris)"
-
-# One paragraph (Markdown works).
-collaboration: "I've collaborated with researchers at Google DeepMind, Samsung Advanced Institute of Technology (SAIT), LG AI Research (EXAONE Lab, Superintelligence Lab), and Trillion Labs."

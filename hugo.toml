@@ -2,7 +2,7 @@
 # baseURL is replaced automatically by the GitHub Pages deploy workflow.
 baseURL = "https://reiss-koh.github.io/"
 locale = "en-us"
-title = "Woosung (Reiss) Koh"
+title = "Reiss Koh"
 disableKinds = ["taxonomy", "term", "section", "rss"]
 enableRobotsTXT = true
 
@@ -12,3 +12,5 @@ enableRobotsTXT = true
 [params]
   # How many news items to show before the "older news" toggle.
   newsVisible = 8
+  # Emoji at the end of news items: true shows them, false hides them.
+  newsEmoji = false

@@ -1,6 +1,7 @@
-# Woosung (Reiss) Koh: homepage
+# Reiss Koh: homepage
 
-A single-page [Hugo](https://gohugo.io/) site with no theme, no npm and no build tools besides Hugo.
+A small [Hugo](https://gohugo.io/) site (the homepage plus a More Publications page) with no theme, no npm
+and no build tools besides Hugo; the only JavaScript is a few lines for the light/dark toggle.
 Every commit to `main` is published to GitHub Pages automatically. Before the first deploy, do the
 [one-time setup](#one-time-setup).
 
@@ -10,12 +11,14 @@ Every commit to `main` is published to GitHub Pages automatically. Before the fi
 | --------------------------------------------------------------- | ---------------------------------------------------------- |
 | Bio (About section)                                             | `content/_index.md`: the text below the `---` block        |
 | Title in the browser tab and in link previews                   | `title` in `content/_index.md`                             |
-| Sidebar: name, role, affiliation, links, interests              | `data/profile.yaml`                                        |
+| Sidebar: name, role, affiliation, location, links, interests    | `data/profile.yaml`                                        |
 | News                                                            | `data/news.yaml`                                           |
 | Papers                                                          | `data/publications.yaml`                                   |
 | Experience, education, awards, service, mentees, collaboration  | `data/cv.yaml`                                             |
 | Photo                                                           | `assets/images/visa_dp.png` (`photo` in `data/profile.yaml`) |
 | How many news items show before the "older news" toggle         | `newsVisible` in `hugo.toml`                               |
+| Emoji at the end of news items on/off                           | `newsEmoji` in `hugo.toml` (`true` or `false`)             |
+| Title of the second page with the other papers                  | `title` in `content/publications.md`                       |
 
 **Editing on GitHub:** open the file, click the pencil icon, edit, then **Commit changes**.
 To replace the photo, open `assets/images/`, choose **Add file → Upload files**, upload any photo (JPG or PNG, any size),
@@ -28,8 +31,11 @@ Lists appear in file order (newest first), so add new entries **first in the lis
 neighbouring entries (spaces, never tabs) and keep text in double quotes (write `\"` for a quote inside).
 Dates are `"YYYY-MM"`, for example `"2026-10"` (a full date such as `"2026-10-15"` also works; only the month is shown).
 
-Sidebar links appear in lowercase, in the order listed in `data/profile.yaml`. Keep the labels short (`Scholar`,
+Sidebar links appear as written, in the order listed in `data/profile.yaml`. Keep the labels short (`Scholar`,
 not `Google Scholar`) so that all of them fit on one line.
+
+The light/dark toggle (top right of the sidebar) follows the visitor's system setting until they click it;
+their choice is remembered in their browser.
 
 ## Copy-paste snippets
 
@@ -55,6 +61,9 @@ The newest 8 items are shown (`newsVisible` in `hugo.toml`); older ones move int
 
 - `id`: C = conference paper, J = journal article, W = workshop paper, P = preprint, plus the next free
   number. It is shown in the margin beside the title; hovering over it shows what the letter means.
+  C and P papers are listed under **Selected Publications** on the homepage; J and W papers on the
+  **More Publications** page (`/publications/`, grouped into journal articles and workshop papers), which the
+  homepage links to. To move one paper, add `selected: true` (homepage) or `selected: false` (other page) to it.
 - `authors`: one comma-separated string. Put `*` right after a name to mark equal contribution.
   Your name (`paper_name` in `data/profile.yaml`) is bolded automatically.
 - `venue`: honours in brackets at the end are highlighted automatically: `"NeurIPS 2026 (Oral)"` shows as

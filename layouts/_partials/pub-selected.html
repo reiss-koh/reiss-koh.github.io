@@ -1,0 +1,11 @@
+{{- /* Is this paper on the homepage (Selected Publications)? Yes, unless its id
+       starts with J (journal) or W (workshop): those are on the More
+       Publications page. "selected: true" or "selected: false" in
+       data/publications.yaml overrides this for one paper. */ -}}
+{{- $on := true -}}
+{{- if isset . "selected" -}}
+  {{- $on = eq (lower (printf "%v" .selected)) "true" -}}
+{{- else -}}
+  {{- $on = not (in (slice "J" "W") (upper (substr (printf "%v" (.id | default "")) 0 1))) -}}
+{{- end -}}
+{{- return $on -}}

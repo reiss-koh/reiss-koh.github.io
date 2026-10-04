@@ -6,6 +6,7 @@
 <body>
   <div class="page">
     <header class="profile">
+      {{ partial "theme.html" . }}
       <p class="name"><a class="quiet" href="{{ "" | relURL }}">{{ (hugo.Data.profile | default dict).name | default site.Title }}</a></p>
     </header>
     <main class="content">

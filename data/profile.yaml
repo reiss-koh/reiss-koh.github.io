@@ -8,7 +8,7 @@
 # needs both. A file kept in this repository, such as a CV in static/files/,
 # is linked as url: "files/cv.pdf".
 
-name: "Woosung (Reiss) Koh"
+name: "Reiss Koh"
 
 # Your name as it is written in author lists, without the *. It is bolded
 # automatically in the publication author lists, also where it has a *.
@@ -19,6 +19,9 @@ role: "PhD Student"
 affiliation:
   name: "KAIST AI"
   url: "https://gsai.kaist.ac.kr/"
+
+# Where you are, shown under the role line (delete the line to hide it).
+location: "Bellevue, WA"
 
 # Photo inside the assets/ folder (JPG or PNG, any size): it is cropped to a
 # centred square and resized automatically.
@@ -31,6 +34,6 @@ interests: ["Foundation Models", "Learning", "Efficiency"]
 
 links:
   - { label: "Email",          url: "mailto:reiss.koh@gmail.com" }
-  - { label: "GitHub",         url: "https://github.com/reiss-koh" }
   - { label: "Scholar",        url: "https://scholar.google.com/citations?user=I8j9BBwAAAAJ&hl=en" }
+  - { label: "X",              url: "https://x.com/woosungkohh" }
   - { label: "LinkedIn",       url: "https://www.linkedin.com/in/reisskoh/" }

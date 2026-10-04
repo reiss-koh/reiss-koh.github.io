@@ -9,7 +9,13 @@
 {{- $links := partial "items.html" (dict "list" $p.links "where" (printf "%s, links" $f) "need" (slice "label" "url")) -}}
 {{- $photo := partial "photo.html" $p -}}
 <header class="profile{{ if $photo.src }} has-photo{{ end }}">
+  {{ partial "theme.html" . }}
+  {{- /* the name is the page heading on the homepage; elsewhere a link to it */}}
+  {{- if .IsHome }}
   <h1 class="name">{{ $name }}</h1>
+  {{- else }}
+  <p class="name"><a class="quiet" href="{{ site.Home.RelPermalink }}">{{ $name }}</a></p>
+  {{- end }}
   {{- with $photo.src }}
   <img class="avatar" src="{{ . }}"{{ with $photo.srcset }} srcset="{{ . }}" sizes="(max-width: 860px) 88px, 240px"{{ end }} alt="Photo of {{ $name }}" width="640" height="640">
   {{- end }}
@@ -21,6 +27,9 @@
       {{- if $aff.url }}<a href="{{ $aff.url }}"><strong>{{ . }}</strong></a>{{ else }}<strong>{{ . }}</strong>{{ end }}
     {{- end -}}
   </p>
+  {{- end }}
+  {{- with $p.location }}
+  <p class="location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><span class="vh">Location: </span>{{ . }}</p>
   {{- end }}
   {{- with $interests }}
   <p class="label" id="interests-label">Interests</p>

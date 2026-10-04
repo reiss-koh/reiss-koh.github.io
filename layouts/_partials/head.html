@@ -3,22 +3,28 @@
 {{- /* The browser-tab and link-preview title: title in content/_index.md */ -}}
 {{- $title := site.Home.Title | default $name -}}
 {{- $photo := (partial "photo.html" $p).abs -}}
+{{- /* The homepage, a page such as More Publications (content/*.md), or the 404 page */ -}}
+{{- $is404 := eq .Kind "404" -}}
+{{- $pageTitle := cond .IsHome $title (printf "%s · %s" (cond $is404 "Page not found" .Title) $title) -}}
+{{- $description := .Params.description | default $p.description -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{- if .IsHome }}
-<title>{{ $title }}</title>
-{{- with $p.description }}
+<title>{{ $pageTitle }}</title>
+{{- if $is404 }}
+<meta name="robots" content="noindex">
+{{- else }}
+{{- with $description }}
 <meta name="description" content="{{ . }}">
 {{- end }}
 <link rel="canonical" href="{{ .Permalink }}">
-{{- else }}
-<title>Page not found · {{ $title }}</title>
-<meta name="robots" content="noindex">
 {{- end }}
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/png">
+{{- /* A light or dark theme picked with the toggle (theme.html), applied before the page is drawn */}}
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="icon" href="{{ "favicon.png" | relURL }}" type="image/png" sizes="64x64">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 
 {{- /* The Inter font is declared in main.css. Preloading the upright face lets it
@@ -29,12 +35,12 @@
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
 {{- end }}
 
-{{- if .IsHome }}
+{{- if not $is404 }}
 {{- /* Link previews (Slack, X, LinkedIn, ...) */}}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{{ $title }}">
-<meta property="og:title" content="{{ $title }}">
-{{- with $p.description }}
+<meta property="og:title" content="{{ $pageTitle }}">
+{{- with $description }}
 <meta property="og:description" content="{{ . }}">
 {{- end }}
 <meta property="og:url" content="{{ .Permalink }}">
@@ -43,8 +49,8 @@
 <meta property="og:image:alt" content="Photo of {{ $name }}">
 {{- end }}
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ $title }}">
-{{- with $p.description }}
+<meta name="twitter:title" content="{{ $pageTitle }}">
+{{- with $description }}
 <meta name="twitter:description" content="{{ . }}">
 {{- end }}
 {{- with $photo }}
@@ -52,11 +58,17 @@
 <meta name="twitter:image:alt" content="Photo of {{ $name }}">
 {{- end }}
 
-{{- /* Structured data for search engines, built so that a missing value is left
-       out rather than written as null. sameAs = the links to web profiles
-       (https://…), so not email or files in the repository. profile.html
-       reports badly written links; here they are just left out. */}}
+{{- end }}
+
+{{- if .IsHome }}
+{{- /* Structured data for search engines (homepage only), built so that a
+       missing value is left out rather than written as null. alternateName =
+       the name in author lists, so that search engines connect it with the
+       papers. sameAs = the links to web profiles (https://…), so not email or
+       files in the repository. profile.html reports badly written links; here
+       they are just left out. */}}
 {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $name "url" .Permalink }}
+{{- with $p.paper_name }}{{ if ne (strings.TrimSpace (printf "%v" .)) $name }}{{ $person = merge $person (dict "alternateName" (strings.TrimRight "*" (strings.TrimSpace (printf "%v" .)))) }}{{ end }}{{ end }}
 {{- with $p.description }}{{ $person = merge $person (dict "description" .) }}{{ end }}
 {{- with $p.role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end }}
 {{- $aff := $p.affiliation | default dict }}

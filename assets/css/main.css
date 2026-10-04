@@ -67,6 +67,10 @@
   --underline: #8b929e;  /* link underlines (3.13:1, the 3:1 needed to spot a link) */
   --sep: #b8bdc5;        /* "·" separators (decorative) */
   --photo: 0 0 0 1px rgb(0 0 0 / .06);  /* a hairline edge around the photo, no shadow */
+  --hover: rgb(0 0 0 / .05);  /* light tint behind the theme toggle on hover */
+  --moon: block;         /* theme toggle icon: moon in light mode ... */
+  --sun: none;           /* ... sun in dark mode */
+  color-scheme: light;
 
   --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -173,6 +177,7 @@ a.quiet:hover,
 .page { padding: 3.5rem 2rem 0; }
 
 /* 5. Profile ------------------------------------------------------------- */
+.profile { position: relative; }  /* holds the theme toggle in its top right corner */
 /* The profile stays in view while scrolling, but only in the two-column
    layout and when the window is tall enough to show all of it */
 @media (min-width: 861px) and (min-height: 640px) {
@@ -181,11 +186,11 @@ a.quiet:hover,
 
 .name {
   margin: 0 0 1rem;
+  padding-right: 2.5rem;  /* room for the theme toggle */
   font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.15;
-  letter-spacing: .02em;
-  text-transform: uppercase;
+  letter-spacing: -.01em;
   text-wrap: balance;
 }
 
@@ -208,12 +213,23 @@ a.quiet:hover,
   text-wrap: balance;
 }
 
+/* Location: "Bellevue, WA" with a map-pin icon */
+.location {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  margin: -.5rem 0 1rem;
+  font-size: .9rem;
+  color: var(--muted);
+}
+.location svg { flex: none; width: .95rem; height: .95rem; }
+
 /* Interests read "Foundation Models, Learning, Efficiency" (dots on phones).
    The commas are real text (.comma), so copied text keeps them too. */
 .interests { padding: 0; list-style: none; }
 .interests li { display: inline; }
 
-/* Contact links: "email · github · …". The "·" sits in the gap before each
+/* Contact links: "Email · Scholar · …", as written in data/profile.yaml. The "·" sits in the gap before each
    item; one that would start a wrapped line falls outside the box and is
    clipped by overflow: hidden. The 4px padding keeps focus rings visible. */
 .links {
@@ -239,7 +255,6 @@ a.quiet:hover,
 .links a {
   color: inherit;
   text-decoration-color: transparent;
-  text-transform: lowercase;
 }
 .links a:hover { color: var(--fg); text-decoration-color: currentColor; }
 
@@ -249,7 +264,8 @@ a.quiet:hover,
 .block { margin: 0 0 3rem; }
 .block:last-child { margin-bottom: 0; }
 
-.block h2,
+.block > h2,
+.page-title,
 .title-404 {
   margin: 0 0 1rem;
   font-size: 1.6rem;
@@ -258,17 +274,6 @@ a.quiet:hover,
   letter-spacing: .01em;
   text-transform: uppercase;
 }
-
-.block-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  column-gap: 1rem;
-  margin-bottom: 1rem;
-}
-.block-head h2 { margin: 0; }
-.note { font-size: .85rem; color: var(--muted); }
 
 .prose p { margin: 0 0 .75rem; text-wrap: pretty; }
 .prose p:last-child { margin-bottom: 0; }
@@ -393,6 +398,25 @@ a.quiet:hover,
 .pub-tags { color: var(--muted); }
 .tag { white-space: nowrap; }  /* a topic such as "VLM-as-a-Judge" never splits */
 
+/* Link from Selected Publications to the page with the others */
+.more { margin-top: 1.5rem; font-size: .92rem; }
+.more a { color: var(--muted); }
+.more a:hover { color: var(--fg); }
+
+/* The "More Publications" page: groups such as "Journal articles" */
+.group { margin-top: 2rem; }
+.group:first-of-type { margin-top: 0; }
+.group > h2 {
+  margin: 0 0 1rem;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.back { margin-top: 3rem; font-size: .92rem; }
+
 /* 9. Footer -------------------------------------------------------------- */
 .footer { padding: 4rem 2rem 3rem; }
 .footer p {
@@ -405,6 +429,30 @@ a.quiet:hover,
 /* real spaces around the dot (so the two parts don't run together when read
    aloud or copied); with this margin the gap matches the other separators */
 .footer .sep { margin: 0 .17em; }
+
+/* Light/dark toggle, in the profile's top right corner, level with the name.
+   Shown only when JavaScript runs (theme.html); the moon shows in light mode,
+   the sun in dark mode. */
+.theme-toggle {
+  position: absolute;
+  top: -.3rem;
+  right: -.5rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .15s, background-color .15s;
+}
+.theme-toggle:hover { color: var(--fg); background: var(--hover); }
+.theme-toggle svg { width: 1.15rem; height: 1.15rem; }
+.theme-toggle .sun { display: var(--sun); }
+.theme-toggle .moon { display: var(--moon); }
 
 /* 10. Smaller screens ---------------------------------------------------- */
 /* Small laptops and large tablets: the same two columns, with less space
@@ -431,17 +479,19 @@ a.quiet:hover,
 
   .name { font-size: 1.25rem; }
   .avatar { width: 5.5rem; }
+  .theme-toggle { top: -.6rem; right: -.6rem; width: 2.75rem; height: 2.75rem; }
 
   /* Photo on the left with the name and role centred beside it; links and
      interests below, full width */
   .profile.has-photo {
     display: grid;
     grid-template-columns: 5.5rem minmax(0, 1fr);
-    grid-template-rows: 1fr auto auto 1fr auto auto auto;
+    grid-template-rows: 1fr auto auto auto 1fr auto auto auto;
     grid-template-areas:
       "photo ."
       "photo name"
       "photo role"
+      "photo location"
       "photo ."
       "links links"
       "label label"
@@ -451,6 +501,7 @@ a.quiet:hover,
   .has-photo .avatar { grid-area: photo; margin: 0; }
   .has-photo .name { grid-area: name; margin-bottom: .3rem; }
   .has-photo .role { grid-area: role; margin: 0; }
+  .has-photo .location { grid-area: location; margin: .15rem 0 0; }
   .has-photo .links { grid-area: links; margin-top: .6rem; }
   .has-photo .label { grid-area: label; margin: .35rem 0 .2rem; }
   .has-photo .interests { grid-area: interests; margin: 0; }
@@ -491,17 +542,38 @@ a.quiet:hover,
   .key { font-size: .88rem; }
 }
 
-/* 11. Dark mode (follows the operating system setting) ------------------- */
+/* 11. Dark mode ---------------------------------------------------------- */
+/* Follows the operating system setting, unless the visitor picked light or
+   dark with the toggle (saved as data-theme on <html>). The two blocks hold
+   the same colors: keep them in sync. */
+:root[data-theme="dark"] {
+  --bg: #111111;
+  --fg: #ececec;         /* 16.0:1 */
+  --fg-2: #c4c7cc;       /* 11.1:1 */
+  --muted: #9ca3af;      /* 7.44:1 */
+  --line: #2a2a2a;
+  --underline: #5f646c;  /* 3.17:1 */
+  --sep: #4b4b4b;
+  --photo: 0 0 0 1px rgb(255 255 255 / .1);  /* a hairline ring, not a shadow */
+  --hover: rgb(255 255 255 / .08);
+  --moon: none;
+  --sun: block;
+  color-scheme: dark;
+}
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #111111;
-    --fg: #ececec;         /* 16.0:1 */
-    --fg-2: #c4c7cc;       /* 11.1:1 */
-    --muted: #9ca3af;      /* 7.44:1 */
+    --fg: #ececec;
+    --fg-2: #c4c7cc;
+    --muted: #9ca3af;
     --line: #2a2a2a;
-    --underline: #5f646c;  /* 3.17:1 */
+    --underline: #5f646c;
     --sep: #4b4b4b;
-    --photo: 0 0 0 1px rgb(255 255 255 / .1);  /* a hairline ring, not a shadow */
+    --photo: 0 0 0 1px rgb(255 255 255 / .1);
+    --hover: rgb(255 255 255 / .08);
+    --moon: none;
+    --sun: block;
+    color-scheme: dark;
   }
 }
 

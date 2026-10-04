@@ -6,7 +6,8 @@
 {{- end }}
 {{- with .Content }}
 <section class="block" aria-labelledby="about">
-  <h2 id="about">About</h2>
+  {{- /* no visible heading; screen readers still get one */}}
+  <h2 id="about" class="vh">About</h2>
   <div class="prose">{{ . }}</div>
 </section>
 {{- end }}
