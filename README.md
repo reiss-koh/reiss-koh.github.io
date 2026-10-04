@@ -161,3 +161,9 @@ This restores the old `netlify.toml`, so Netlify builds and serves the old site 
 builds on Netlify (its own GitHub workflow uses retired actions and will fail), so GitHub Pages keeps
 showing the new site until you unpublish it (**Settings → Pages → ⋯ → Unpublish site**).
 To undo the rollback later, `git revert` that commit and push.
+
+## License
+
+The site's content (text and photo) is under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/):
+anyone may reuse it if they give credit. This is stated in the footer (`layouts/_partials/footer.html`).
+The code is under the MIT license in `LICENSE.md`.

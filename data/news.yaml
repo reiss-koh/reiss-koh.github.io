@@ -26,8 +26,8 @@
 # - date: "2026-05"
 #   text: "Accepted offer joining **Amazon AGI (Bellevue)** as an Applied Scientist (L5) Intern this fall. ⛰️"
 
-- date: "2026-05"
-  text: "[**gWorld**](https://trillionlabs-gworld.github.io/) has been accepted to **ICML 2026**! 🎉"
+# - date: "2026-05"
+#   text: "[**gWorld**](https://trillionlabs-gworld.github.io/) has been accepted to **ICML 2026**! 🎉"
 
 - date: "2026-02"
   text: "[**gWorld**](https://trillionlabs-gworld.github.io) featured in over 10 [news outlets](https://www.mk.co.kr/en/it/11957309) as the first open-weight visual mobile GUI world model, outperforming models up to **50.25×** in size! 📰"
