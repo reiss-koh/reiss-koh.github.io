@@ -510,14 +510,14 @@ a.quiet:hover,
   .footer .sep { display: none; }
 
   .name { font-size: 1.25rem; }
-  .avatar { width: 5.5rem; }
+  .avatar { width: 5.8rem; }  /* tall enough to reach the last location line */
   .theme-toggle { top: -.6rem; right: -.6rem; width: 2.75rem; height: 2.75rem; }
 
   /* Photo on the left with the name and role centred beside it; links and
      interests below, full width */
   .profile.has-photo {
     display: grid;
-    grid-template-columns: 5.5rem minmax(0, 1fr);
+    grid-template-columns: 5.8rem minmax(0, 1fr);
     grid-template-rows: 1fr auto auto auto 1fr auto auto auto;
     grid-template-areas:
       "photo ."

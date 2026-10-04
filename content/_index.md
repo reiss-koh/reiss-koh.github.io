@@ -1,5 +1,5 @@
 ---
-title: "Reiss Koh"
+title: "Reiss Koh (Woosung Koh)"
 # The heading above the About text (delete the line for no heading).
 heading: "Hi"
 # The title is shown in the browser tab and in link previews.

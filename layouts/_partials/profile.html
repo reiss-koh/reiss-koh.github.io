@@ -17,7 +17,7 @@
   <p class="name"><a class="quiet" href="{{ site.Home.RelPermalink }}">{{ $name }}</a></p>
   {{- end }}
   {{- with $photo.src }}
-  <img class="avatar" src="{{ . }}"{{ with $photo.srcset }} srcset="{{ . }}" sizes="(max-width: 860px) 88px, 240px"{{ end }} alt="Photo of {{ $name }}" width="640" height="640">
+  <img class="avatar" src="{{ . }}"{{ with $photo.srcset }} srcset="{{ . }}" sizes="(max-width: 860px) 93px, 240px"{{ end }} alt="Photo of {{ $name }}" width="640" height="640">
   {{- end }}
   {{- if or $p.role $aff.name }}
   <p class="role">
