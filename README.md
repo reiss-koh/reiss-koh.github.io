@@ -62,7 +62,7 @@ The newest 8 items are shown (`newsVisible` in `hugo.toml`); older ones move int
 - `id`: C = conference paper, J = journal article, W = workshop paper, P = preprint, plus the next free
   number. It is shown in the margin beside the title; hovering over it shows what the letter means.
   C and P papers are listed under **Selected Publications** on the homepage; J and W papers on the
-  **More Publications** page (`/publications/`, grouped into journal articles and workshop papers), which the
+  **More Publications** page (`/publications/`, grouped into Journal and Workshop), which the
   homepage links to. To move one paper, add `selected: true` (homepage) or `selected: false` (other page) to it.
 - `authors`: one comma-separated string. Put `*` right after a name to mark equal contribution.
   Your name (`paper_name` in `data/profile.yaml`) is underlined automatically.
