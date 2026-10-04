@@ -24,7 +24,7 @@
     {{- with $p.role }}{{ . }}{{ end }}
     {{- with $aff.name }}
       {{- if $p.role }} at {{ end }}
-      {{- if $aff.url }}<a href="{{ $aff.url }}">{{ . }}</a>{{ else }}{{ . }}{{ end }}
+      {{- if $aff.url }}<a href="{{ $aff.url }}"{{ if partial "external.html" $aff.url }} target="_blank" rel="noopener"{{ end }}>{{ . }}</a>{{ else }}{{ . }}{{ end }}
     {{- end -}}
   </p>
   {{- end }}
@@ -51,7 +51,7 @@
     {{- range . }}
     {{- /* rel="me" marks your profiles elsewhere (not email, not files in the repository) */}}
     {{- $url := partial "url.html" .url }}
-    <li><a href="{{ $url }}"{{ if findRE `^https?://` $url 1 }} rel="me"{{ end }}>{{ .label }}</a></li>
+    <li><a href="{{ $url }}"{{ if findRE `^https?://` $url 1 }} target="_blank" rel="me noopener"{{ end }}>{{ .label }}</a></li>
     {{- end }}
   </ul>
   {{- end }}

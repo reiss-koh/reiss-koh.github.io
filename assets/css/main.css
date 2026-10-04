@@ -408,7 +408,13 @@ a.quiet:hover,
 .nobr { white-space: nowrap; }
 
 .pub-authors { margin-top: .2rem; font-size: .92rem; line-height: 1.45; color: var(--fg-2); }
-.pub-authors strong { color: var(--fg); }
+/* your name (paper_name in data/profile.yaml): underlined */
+.pub-authors .me {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 /* A name (with its "*" and comma) stays on one line; only a name longer than
    the whole line wraps inside itself */
 .author { display: inline-block; max-width: 100%; }

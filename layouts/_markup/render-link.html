@@ -1,0 +1,4 @@
+{{- /* Links written in Markdown (About text, news, More About Me): a link to
+       another website opens in a new tab */ -}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if partial "external.html" .Destination }} target="_blank" rel="noopener"{{ end }}>{{ .Text }}</a>
+{{- /**/ -}}

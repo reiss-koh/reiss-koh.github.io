@@ -20,7 +20,7 @@
       {{- /* a hyphenated word ("Time-series") never splits at its hyphen */}}
       {{- $title := printf "%v" .title | htmlEscape | replaceRE `(\S+-\S+)` `<span class="nobr">$1</span>` | safeHTML }}
       <h3 class="pub-title" id="{{ $titleID }}">
-        {{- with or .pdf .project .code }}<a href="{{ partial "url.html" . }}">{{ $title }}</a>{{ else }}{{ $title }}{{ end -}}
+        {{- with or .pdf .project .code }}<a href="{{ partial "url.html" . }}"{{ if partial "external.html" . }} target="_blank" rel="noopener"{{ end }}>{{ $title }}</a>{{ else }}{{ $title }}{{ end -}}
       </h3>
       {{- with .authors }}
       <p class="pub-authors">{{ partial "authors.html" (dict "authors" . "where" (printf "%s, authors" $where)) }}</p>
@@ -37,7 +37,7 @@
         <span class="pub-links">
           {{- range $j, $kind := . }}
           {{- if $j }}<span class="sep" aria-hidden="true">·</span>{{ end -}}
-          <a href="{{ partial "url.html" (index $pub $kind) }}" aria-describedby="{{ $titleID }}">{{ $kind }}</a>
+          <a href="{{ partial "url.html" (index $pub $kind) }}" aria-describedby="{{ $titleID }}"{{ if partial "external.html" (index $pub $kind) }} target="_blank" rel="noopener"{{ end }}>{{ $kind }}</a>
           {{- end -}}
         </span>
         {{- end }}

@@ -65,7 +65,7 @@ The newest 8 items are shown (`newsVisible` in `hugo.toml`); older ones move int
   **More Publications** page (`/publications/`, grouped into journal articles and workshop papers), which the
   homepage links to. To move one paper, add `selected: true` (homepage) or `selected: false` (other page) to it.
 - `authors`: one comma-separated string. Put `*` right after a name to mark equal contribution.
-  Your name (`paper_name` in `data/profile.yaml`) is bolded automatically.
+  Your name (`paper_name` in `data/profile.yaml`) is underlined automatically.
 - `venue`: honours in brackets at the end are highlighted automatically: `"NeurIPS 2026 (Oral)"` shows as
   "NeurIPS 2026 · **Oral**". This works for brackets that contain a word such as Oral, Spotlight, Award, Best,
   Outstanding, Honorable Mention, Highlight, Distinguished, Notable, Talk or Prize, and for several in a row:

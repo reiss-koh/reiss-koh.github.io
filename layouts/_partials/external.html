@@ -1,0 +1,3 @@
+{{- /* Is this a link to another website (https://…)? Such links open in a new
+       tab; links within this site, #anchors and mailto: links do not. */ -}}
+{{- return (findRE `^(?i)(https?:)?//` (strings.TrimSpace (printf "%v" .)) 1 | len | eq 1) -}}
