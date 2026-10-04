@@ -67,6 +67,7 @@
   --underline: #8b929e;  /* link underlines (3.13:1, the 3:1 needed to spot a link) */
   --sep: #b8bdc5;        /* "·" separators (decorative) */
   --photo: 0 0 0 1px rgb(0 0 0 / .06);  /* a hairline edge around the photo, no shadow */
+  --topic: #52525b;      /* topics in the About text (7.7:1) */
   --hover: rgb(0 0 0 / .05);  /* light tint behind the theme toggle on hover */
   --moon: block;         /* theme toggle icon: moon in light mode ... */
   --sun: none;           /* ... sun in dark mode */
@@ -218,16 +219,18 @@ a.quiet:hover,
   text-wrap: balance;
 }
 
-/* Location: "Bellevue, WA" with a map-pin icon */
+/* Location: a map-pin icon, then one place per line */
 .location {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: .35rem;
   margin: -.5rem 0 1rem;
   font-size: .9rem;
+  line-height: 1.5;
   color: var(--muted);
 }
-.location svg { flex: none; width: .95rem; height: .95rem; }
+.location svg { flex: none; width: .95rem; height: .95rem; margin-top: .2rem; }
+.places { margin: 0; padding: 0; list-style: none; }
 
 /* Interests read "Foundation Models, Learning, Efficiency" (dots on phones).
    The commas are real text (.comma), so copied text keeps them too. */
@@ -280,6 +283,8 @@ a.quiet:hover,
 }
 
 .prose p { margin: 0 0 .75rem; text-wrap: pretty; }
+/* Topics marked ==like this== in the About text */
+.prose mark { background: none; color: var(--topic); font-weight: 600; }
 .prose p:last-child { margin-bottom: 0; }
 
 .part + .part { margin-top: 2rem; }
@@ -560,6 +565,7 @@ a.quiet:hover,
   --underline: #5f646c;  /* 3.17:1 */
   --sep: #4b4b4b;
   --photo: 0 0 0 1px rgb(255 255 255 / .1);  /* a hairline ring, not a shadow */
+  --topic: #b4b4bc;      /* topics in the About text (9.4:1) */
   --hover: rgb(255 255 255 / .08);
   --moon: none;
   --sun: block;
@@ -575,7 +581,8 @@ a.quiet:hover,
     --underline: #5f646c;
     --sep: #4b4b4b;
     --photo: 0 0 0 1px rgb(255 255 255 / .1);
-    --hover: rgb(255 255 255 / .08);
+    --topic: #b4b4bc;      /* topics in the About text (9.4:1) */
+  --hover: rgb(255 255 255 / .08);
     --moon: none;
     --sun: block;
     color-scheme: dark;

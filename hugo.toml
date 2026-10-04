@@ -8,6 +8,9 @@ enableRobotsTXT = true
 
 [markup.goldmark.renderer]
   unsafe = true
+# ==text== in Markdown highlights it (used for the topics in the About text)
+[markup.goldmark.extensions.extras.mark]
+  enable = true
 
 [params]
   # How many news items to show before the "older news" toggle.

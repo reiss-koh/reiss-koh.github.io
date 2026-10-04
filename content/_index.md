@@ -3,7 +3,8 @@ title: "Reiss Koh"
 # The heading above the About text (delete the line for no heading).
 heading: "Hi"
 # The title is shown in the browser tab and in link previews.
-# The About text is everything below the second "---" line (Markdown works).
+# The About text is everything below the second "---" line (Markdown works:
+# [text](https://...) for a link, ==text== to highlight a topic).
 ---
 
-I am interested in pushing the boundaries of humanity. Currently, I am an intern at Amazon AGI Foundations, previously at LG Superintelligence Lab and Trillion Labs. I have also published papers in collaboration with researchers at Google DeepMind, Samsung Advanced Institute of Technology, and LG EXAONE Lab. My work spans efficient long-context inference, scaling pre-training, post-training (co-evolution, MOPD, on-policy RFT, SFT), agentic world modeling, feedback/evaluation, and continual learning.
+I am interested in pushing the boundaries of humanity. Currently, I am an intern at [Amazon AGI Foundations](https://www.amazon.science/), previously at [LG Superintelligence Lab](https://www.lgresearch.ai/) and [Trillion Labs](https://trillionlabs.co/). I have also published papers in collaboration with researchers at [Google DeepMind](https://deepmind.google/), [Samsung Advanced Institute of Technology](https://www.sait.samsung.co.kr/), and [LG EXAONE Lab](https://www.lgresearch.ai/exaone). My work spans ==efficient long-context inference==, ==scaling pre-training==, ==post-training== (co-evolution, MOPD, on-policy RFT, SFT), ==agentic world modeling==, and ==continual learning==.
