@@ -29,9 +29,7 @@ location: ["Bellevue, WA", "Seoul"]
 photo: "images/visa_dp.png"
 
 # One sentence for search engines and link previews.
-description: "Woosung (Reiss) Koh is a PhD student at KAIST AI, and at Amazon AGI Foundations, interested in foundation models, learning, and efficiency."
-
-interests: ["Foundation Models", "Learning", "Efficiency"]
+description: "Woosung (Reiss) Koh is a PhD student at KAIST AI, and at Amazon AGI Foundations, interested in achieving superintelligence through foundation models."
 
 links:
   - { label: "Email",          url: "mailto:reiss.koh@gmail.com" }
