@@ -1,6 +1,6 @@
 ---
 title: "More About Me"
-# Shown at the very bottom of the homepage, under Awards, inside "See More".
+# Shown on the homepage, just above "See More".
 # Write below the second "---" line (Markdown works: [text](https://...) for a
 # link, **bold**, a blank line between paragraphs). This file is not a page of
 # its own.

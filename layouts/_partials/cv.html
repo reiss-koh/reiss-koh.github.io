@@ -1,6 +1,6 @@
-{{- /* From data/cv.yaml: experience (and collaboration) under the "Experience"
-       heading, then education, service, mentoring, awards and More About Me in
-       a "See More" section at the end. Every entry is checked by items.html (an
+{{- /* From data/cv.yaml: More About Me, then experience, collaboration,
+       education, service, mentoring and awards in a "See More" section at the
+       end. Every entry is checked by items.html (an
        award needs a title; a service or mentee line a text).
        Empty lists are skipped; when everything is empty the section is dropped. */ -}}
 {{- $f := "data/cv.yaml" -}}
@@ -14,38 +14,6 @@
 {{- $awards := partial "items.html" (dict "list" $cv.awards "where" (printf "%s, awards" $f) "need" (slice "title")) -}}
 {{- $service := partial "items.html" (dict "list" $cv.service "where" (printf "%s, service" $f) "need" (slice "text")) -}}
 {{- $mentees := partial "items.html" (dict "list" $cv.mentees "where" (printf "%s, mentees" $f) "need" (slice "text")) -}}
-{{- if or $experience $cv.collaboration }}
-<section class="block" aria-labelledby="experience">
-  <h2 id="experience">Experience</h2>
-
-  {{- with $experience }}
-  <div class="part">
-    <ul class="rows rows-wide">
-      {{- range . }}
-      {{- $e := . }}
-      <li>
-        {{- with partial "range.html" (dict "entry" . "where" (printf "%s, experience \"%v\"" $f (or .role .org ""))) }}
-        <span class="when">{{ . }}</span>
-        {{- end }}
-        <div>
-          {{- .role }}{{ if and .role .org }}, {{ end }}
-          {{- with .org }}<strong class="org">{{ with $e.url }}<a href="{{ . }}"{{ if partial "external.html" . }} target="_blank" rel="noopener"{{ end }}>{{ $e.org }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end -}}
-        </div>
-      </li>
-      {{- end }}
-    </ul>
-  </div>
-  {{- end }}
-
-  {{- with $cv.collaboration }}
-  <div class="part">
-    <h3 id="collaboration">Collaboration</h3>
-    <div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>
-  </div>
-  {{- end }}
-</section>
-{{- end }}
-
 {{- /* More About Me (content/more-about-me.md), its own section */}}
 {{- with site.GetPage "/more-about-me" }}
 {{- $title := .Title | default "More About Me" }}
@@ -57,13 +25,38 @@
 {{- end }}
 {{- end }}
 
-{{- /* Education, service, mentoring and awards come last, folded into a
-       "See More" section (<details>, no JavaScript): click its heading to
-       open it */}}
-{{- if or $education $service $mentees $awards }}
+{{- /* Experience, collaboration, education, service, mentoring and awards
+       come last, folded into a "See More" section (<details>, no JavaScript):
+       click its heading to open it */}}
+{{- if or $experience $cv.collaboration $education $service $mentees $awards }}
 <section class="block" aria-labelledby="see-more">
   <details class="see-more">
     <summary><h2 id="see-more">See More</h2></summary>
+    {{- with $experience }}
+    <div class="part">
+      <h3 id="experience">Experience</h3>
+      <ul class="rows rows-wide">
+        {{- range . }}
+        {{- $e := . }}
+        <li>
+          {{- with partial "range.html" (dict "entry" . "where" (printf "%s, experience \"%v\"" $f (or .role .org ""))) }}
+          <span class="when">{{ . }}</span>
+          {{- end }}
+          <div>
+            {{- .role }}{{ if and .role .org }}, {{ end }}
+            {{- with .org }}<strong class="org">{{ with $e.url }}<a href="{{ . }}"{{ if partial "external.html" . }} target="_blank" rel="noopener"{{ end }}>{{ $e.org }}</a>{{ else }}{{ . }}{{ end }}</strong>{{ end -}}
+          </div>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+    {{- with $cv.collaboration }}
+    <div class="part">
+      <h3 id="collaboration">Collaboration</h3>
+      <div class="prose">{{ $.RenderString (dict "display" "block") . }}</div>
+    </div>
+    {{- end }}
     {{- with $education }}
     <div class="part">
       <h3 id="education">Education</h3>
