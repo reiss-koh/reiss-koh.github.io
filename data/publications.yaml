@@ -18,6 +18,7 @@
   authors: "Woosung Koh, Hyunsoo Lee, Kyungjae Lee, Haeju Park, Dahyun Lee, Dasol Hwang, Moontae Lee"
   venue: "Pre-print"
   tags: ["Continual Learning", "Self-distillation", "Fine-tuning", "Small Language Model"]
+  pdf: "https://arxiv.org/pdf/2610.13113"
 
 - id: "P1"
   title: "Language Models Can Control Their Own Attention"
