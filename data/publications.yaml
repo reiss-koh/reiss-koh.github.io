@@ -26,6 +26,7 @@
   venue: "Pre-print"
   tags: ["Long-context", "Efficient Inference", "Sparse Attention"]
   pdf: "https://arxiv.org/pdf/2609.02737"
+  code: "https://github.com/itsnamgyu/declarative-attention"
 
 - id: "C6"
   title: "mSFT: Addressing Dataset Mixtures Overfiting Heterogeneously in Multi-task SFT"

@@ -6,3 +6,8 @@ resources/_gen/
 # OS / editor files
 .DS_Store
 .idea/
+
+# Working files kept next to the site but never published (publish.sh commits
+# everything else). The CV linked from the site is static/files/cv.pdf.
+/CV/
+/*.pdf

@@ -88,6 +88,9 @@ lined up with the existing entries (two spaces before the `-`). `note` is an opt
 ## Publishing
 
 - Every commit to `main` rebuilds and redeploys the site in about a minute (**Actions** tab → "Deploy site").
+- Editing on your computer: run `./publish.sh` (needs Hugo, see [below](#local-preview-optional)). It checks that the
+  site builds, then commits and pushes everything; `./publish.sh "message"` sets the commit message. A build error is
+  printed instead of pushed. Root-level PDFs and `CV/` are never pushed (`.gitignore`).
 - A failed run (red ✗) is almost always a YAML typo, such as a missing quote or wrong indentation, or a date that
   isn't `"YYYY-MM"`. Open the run, then the **Build** step: the message names the file and the line, or the entry to
   fix. The mistake is on the reported line or a few lines above it; a missing closing quote, for example, is
