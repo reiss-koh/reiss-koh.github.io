@@ -81,7 +81,7 @@
   title: "FlickerFusion: Intra-trajectory Domain Generalizing Multi-Agent RL"
   authors: "Woosung Koh, Wonbeen Oh, Siyeol Kim, Suhin Shin, Hyeongjin Kim, Jaein Jang, Junghyun Lee, Se-Young Yun"
   venue: "ICLR 2025"
-  tags: ["Multi-Agent RL", "Domain Generalization"]
+  tags: ["Multi-Agent RL", "Domain Generalization", "Hypernetworks"]
   pdf: "https://arxiv.org/abs/2410.15876"
   code: "https://github.com/flickerfusion305/FlickerFusion"
   project: "https://flickerfusion305.github.io"
