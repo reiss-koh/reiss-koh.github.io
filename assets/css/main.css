@@ -69,6 +69,7 @@
   --photo: 0 0 0 1px rgb(0 0 0 / .06);  /* a hairline edge around the photo, no shadow */
   --topic: #52525b;      /* topics in the About text (7.7:1) */
   --venue: #2563eb;      /* publication venues: blue (5.2:1) */
+  --honour: #c2410c;     /* "Oral" etc. after a venue: orange (5.2:1) */
   --hover: rgb(0 0 0 / .05);  /* light tint behind the theme toggle on hover */
   --moon: block;         /* theme toggle icon: moon in light mode ... */
   --sun: none;           /* ... sun in dark mode */
@@ -423,7 +424,7 @@ a.quiet:hover,
 /* Venue: italic; a final "(Oral)" etc. is shown upright after a dot */
 .pub-venue { margin-top: .15rem; font-size: .88rem; line-height: 1.45; font-style: italic; font-weight: 600; color: var(--venue); }
 .pub-venue .sep { margin: 0; }
-.honour { font-style: normal; font-weight: 600; }
+.honour { font-style: normal; font-weight: 600; color: var(--honour); }
 
 /* Links, then the topics; the topics move below the links when they don't fit */
 .pub-meta {
@@ -590,6 +591,7 @@ a.quiet:hover,
   --photo: 0 0 0 1px rgb(255 255 255 / .1);  /* a hairline ring, not a shadow */
   --topic: #b4b4bc;      /* topics in the About text (9.4:1) */
   --venue: #93c5fd;      /* publication venues: light blue (11.3:1) */
+  --honour: #fdba74;     /* light orange (11.4:1) */
   --hover: rgb(255 255 255 / .08);
   --moon: none;
   --sun: block;
