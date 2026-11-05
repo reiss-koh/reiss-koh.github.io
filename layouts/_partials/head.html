@@ -65,12 +65,17 @@
 {{- if .IsHome }}
 {{- /* Structured data for search engines (homepage only), built so that a
        missing value is left out rather than written as null. alternateName =
-       the name in author lists, so that search engines connect it with the
+       the name in author lists and other_names, so that search engines connect it with the
        papers. sameAs = the links to web profiles (https://…), so not email or
        files in the repository. profile.html reports badly written links; here
        they are just left out. */}}
 {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $name "url" .Permalink }}
-{{- with $p.paper_name }}{{ if ne (strings.TrimSpace (printf "%v" .)) $name }}{{ $person = merge $person (dict "alternateName" (strings.TrimRight "*" (strings.TrimSpace (printf "%v" .)))) }}{{ end }}{{ end }}
+{{- $alt := slice }}
+{{- with $p.paper_name }}{{ $alt = $alt | append (strings.TrimRight "*" (strings.TrimSpace (printf "%v" .))) }}{{ end }}
+{{- range partial "list.html" (dict "items" $p.other_names) }}{{ $alt = $alt | append (strings.TrimSpace (printf "%v" .)) }}{{ end }}
+{{- $alts := slice }}
+{{- range $alt }}{{ if and . (ne . $name) (not (in $alts .)) }}{{ $alts = $alts | append . }}{{ end }}{{ end }}
+{{- with $alts }}{{ $person = merge $person (dict "alternateName" (cond (eq (len .) 1) (index . 0) .)) }}{{ end }}
 {{- with $p.description }}{{ $person = merge $person (dict "description" .) }}{{ end }}
 {{- with $p.role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end }}
 {{- $aff := $p.affiliation | default dict }}

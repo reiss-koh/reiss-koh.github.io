@@ -14,6 +14,10 @@ name: "Reiss Koh"
 # automatically in the publication author lists, also where it has a *.
 paper_name: "Woosung Koh"
 
+# Other names you go by (for example in another language), so that search
+# engines connect them with you. Not shown on the page.
+other_names: ["고우성"]
+
 role: "PhD Student"
 
 # Add  url: "https://…"  under name to make the affiliation a link.
@@ -29,7 +33,7 @@ location: ["Bellevue, WA"]
 photo: "images/visa_dp.png"
 
 # One sentence for search engines and link previews.
-description: "Woosung (Reiss) Koh is a PhD student at KAIST AI (Seoul), and at Amazon AGI Foundations as an intern, interested in achieving superintelligence through foundation models and RSI."
+description: "Reiss Koh (Woosung Koh, 고우성) is a PhD student at KAIST AI (Seoul), and at Amazon AGI Foundations as an intern, interested in achieving superintelligence through foundation models and RSI."
 
 links:
   - { label: "Email",          url: "mailto:reiss.koh@gmail.com" }
