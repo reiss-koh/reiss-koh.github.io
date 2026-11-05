@@ -33,7 +33,7 @@ location: ["Bellevue, WA"]
 photo: "images/visa_dp.png"
 
 # One sentence for search engines and link previews.
-description: "Reiss Koh (Woosung Koh, 고우성) is a PhD student at KAIST AI (Seoul), and at Amazon AGI Foundations as an intern, interested in achieving superintelligence through foundation models and RSI."
+description: "Reiss Koh (Woosung Koh, 고우성) is a PhD student at KAIST AI (Seoul), and at Amazon AGI Foundations as an intern, interested in achieving superintelligence through foundation models, recursive self-improvement, and co-evolution."
 
 links:
   - { label: "Email",          url: "mailto:reiss.koh@gmail.com" }
