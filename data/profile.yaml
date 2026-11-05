@@ -18,7 +18,7 @@ role: "PhD Student"
 
 # Add  url: "https://…"  under name to make the affiliation a link.
 affiliation:
-  name: "KAIST AI"
+  name: "KAIST AI (Seoul)"
 
 # Where you are, shown under the role line, one place per line (delete the
 # line to hide it).
@@ -29,7 +29,7 @@ location: ["Bellevue, WA"]
 photo: "images/visa_dp.png"
 
 # One sentence for search engines and link previews.
-description: "Woosung (Reiss) Koh is a PhD student at KAIST AI, and at Amazon AGI Foundations, interested in achieving superintelligence through foundation models."
+description: "Woosung (Reiss) Koh is a PhD student at KAIST AI (Seoul), and at Amazon AGI Foundations as an intern, interested in achieving superintelligence through foundation models and RSI."
 
 links:
   - { label: "Email",          url: "mailto:reiss.koh@gmail.com" }
